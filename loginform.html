@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova College | Student Login</title>
+
+```
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        min-height: 100vh;
+        font-family: Arial, Helvetica, sans-serif;
+        background:
+            linear-gradient(
+                rgba(5, 15, 30, 0.88),
+                rgba(5, 15, 30, 0.94)
+            ),
+            url("nova.jpeg") center / cover no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .login-container {
+        width: 100%;
+        max-width: 430px;
+    }
+
+    .login-card {
+        background: rgba(255, 255, 255, 0.97);
+        border-radius: 20px;
+        padding: 40px 32px;
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+        text-align: center;
+    }
+
+    .logo {
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 18px;
+        border: 4px solid #d4af37;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+        color: #071a33;
+        font-size: 28px;
+        margin-bottom: 7px;
+    }
+
+    .subtitle {
+        color: #777;
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 30px;
+    }
+
+    .form-group {
+        text-align: left;
+        margin-bottom: 18px;
+    }
+
+    label {
+        display: block;
+        color: #263238;
+        font-weight: bold;
+        font-size: 14px;
+        margin-bottom: 7px;
+    }
+
+    .input-wrapper {
+        position: relative;
+    }
+
+    input {
+        width: 100%;
+        padding: 14px 15px;
+        border: 1px solid #d5d5d5;
+        border-radius: 10px;
+        font-size: 15px;
+        outline: none;
+        transition: 0.2s;
+    }
+
+    input:focus {
+        border-color: #d4af37;
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+    }
+
+    .password-input {
+        padding-right: 75px;
+    }
+
+    .show-password {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: #b58b00;
+        font-size: 13px;
+        font-weight: bold;
+        cursor: pointer;
+        padding: 5px 7px;
+    }
+
+    .show-password:hover {
+        text-decoration: underline;
+    }
+
+    .forgot-row {
+        text-align: right;
+        margin-top: -6px;
+        margin-bottom: 18px;
+    }
+
+    .link-btn {
+        background: none;
+        border: none;
+        padding: 2px 0;
+        color: #b58b00;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: inherit;
+        cursor: pointer;
+    }
+
+    .link-btn:hover {
+        text-decoration: underline;
+    }
+
+    .login-btn {
+        width: 100%;
+        padding: 15px;
+        border: none;
+        border-radius: 10px;
+        background: #071a33;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.25s;
+        margin-top: 5px;
+    }
+
+    .login-btn:hover {
+        background: #0d2d52;
+        transform: translateY(-1px);
+    }
+
+    .login-btn:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    #message {
+        display: none;
+        margin-top: 18px;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    #message.success {
+        display: block;
+        background: #e8f7ee;
+        color: #16733a;
+        border: 1px solid #b8e3c8;
+    }
+
+    #message.error {
+        display: block;
+        background: #fdecec;
+        color: #a52828;
+        border: 1px solid #f1bcbc;
+    }
+
+    .register-text {
+        margin-top: 25px;
+        color: #666;
+        font-size: 14px;
+    }
+
+    .register-text a {
+        color: #b58b00;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .register-text a:hover {
+        text-decoration: underline;
+    }
+
+    .home-link {
+        display: inline-block;
+        margin-top: 18px;
+        color: #071a33;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .home-link:hover {
+        color: #b58b00;
+    }
+
+    .loader {
+        width: 18px;
+        height: 18px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-top-color: white;
+        border-radius: 50%;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 8px;
+        animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .loader {
+            animation-duration: 2.4s;
+        }
+
+        .login-btn {
+            transition: none;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .login-card {
+            padding: 32px 22px;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+```
+<div class="login-card">
+
+    <!-- LOGO -->
+    <img
+        src="nova.jpeg"
+        alt="Nova College"
+        class="logo"
+        onerror="this.style.display='none'"
+    >
+
+    <!-- TITLE -->
+    <h1 id="pageTitle">Student Login</h1>
+
+    <p class="subtitle" id="pageSubtitle">
+        Access your Nova College student portal
+    </p>
+
+    <!-- LOGIN FORM -->
+    <form id="loginForm">
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+                autocomplete="email"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+
+            <div class="input-wrapper">
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="password-input"
+                    placeholder="Enter your password"
+                    required
+                    autocomplete="current-password"
+                >
+
+                <button
+                    type="button"
+                    class="show-password"
+                    id="showPassword"
+                >
+                    Show
+                </button>
+
+            </div>
+        </div>
+
+        <div class="forgot-row">
+            <button
+                type="button"
+                class="link-btn"
+                id="showForgot"
+            >
+                Forgot password?
+            </button>
+        </div>
+
+        <button
+            type="submit"
+            class="login-btn"
+            id="loginButton"
+        >
+            Login
+        </button>
+
+    </form>
+
+    <!-- FORGOT PASSWORD FORM -->
+    <form id="forgotForm" hidden>
+
+        <div class="form-group">
+
+            <label for="forgotEmail">
+                Registered Email Address
+            </label>
+
+            <input
+                type="email"
+                id="forgotEmail"
+                name="forgotEmail"
+                placeholder="Enter your registered email"
+                required
+                autocomplete="email"
+            >
+
+        </div>
+
+        <button
+            type="submit"
+            class="login-btn"
+            id="forgotButton"
+        >
+            Send Reset Request
+        </button>
+
+        <div
+            class="forgot-row"
+            style="
+                text-align: center;
+                margin-top: 18px;
+                margin-bottom: 0;
+            "
+        >
+
+            <button
+                type="button"
+                class="link-btn"
+                id="showLogin"
+            >
+                ← Back to login
+            </button>
+
+        </div>
+
+    </form>
+
+    <!-- MESSAGE -->
+    <div
+        id="message"
+        role="status"
+        aria-live="polite"
+    ></div>
+
+    <!-- ADMISSION -->
+    <p class="register-text">
+        Don't have an account?
+        <a href="admission.html">
+            Apply for Admission
+        </a>
+    </p>
+
+    <!-- HOME -->
+    <a
+        href="index.html"
+        class="home-link"
+    >
+        ← Back to Nova College
+    </a>
+
+</div>
+```
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const loginForm = document.getElementById("loginForm");
+    const forgotForm = document.getElementById("forgotForm");
+
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const forgotEmailInput = document.getElementById("forgotEmail");
+
+    const loginButton = document.getElementById("loginButton");
+    const forgotButton = document.getElementById("forgotButton");
+
+    const showForgot = document.getElementById("showForgot");
+    const showLogin = document.getElementById("showLogin");
+    const showPassword = document.getElementById("showPassword");
+
+    const pageTitle = document.getElementById("pageTitle");
+    const pageSubtitle = document.getElementById("pageSubtitle");
+    const message = document.getElementById("message");
+
+
+    // =========================================================
+    // MESSAGE
+    // =========================================================
+
+    function showMessage(text, type) {
+        message.textContent = text;
+        message.className = type;
+        message.style.display = "block";
+    }
+
+    function clearMessage() {
+        message.textContent = "";
+        message.className = "";
+        message.style.display = "none";
+    }
+
+
+    // =========================================================
+    // SHOW / HIDE PASSWORD
+    // =========================================================
+
+    showPassword.addEventListener("click", function () {
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            showPassword.textContent = "Hide";
+        } else {
+            passwordInput.type = "password";
+            showPassword.textContent = "Show";
+        }
+
+    });
+
+
+    // =========================================================
+    // FORGOT PASSWORD
+    // =========================================================
+
+    function openForgot() {
+
+        clearMessage();
+
+        loginForm.hidden = true;
+        forgotForm.hidden = false;
+
+        pageTitle.textContent = "Forgot Password";
+
+        pageSubtitle.textContent =
+            "Enter your registered email. Nova College administration will receive your password reset request.";
+
+        forgotEmailInput.value =
+            emailInput.value.trim();
+
+        forgotEmailInput.focus();
+    }
+
+
+    function openLogin() {
+
+        clearMessage();
+
+        forgotForm.hidden = true;
+        loginForm.hidden = false;
+
+        pageTitle.textContent = "Student Login";
+
+        pageSubtitle.textContent =
+            "Access your Nova College student portal";
+
+        emailInput.focus();
+    }
+
+
+    showForgot.addEventListener("click", openForgot);
+    showLogin.addEventListener("click", openLogin);
+
+
+    // =========================================================
+    // STUDENT LOGIN
+    // =========================================================
+
+    loginForm.addEventListener("submit", async function (event) {
+
+        event.preventDefault();
+
+        clearMessage();
+
+        const email =
+            emailInput.value.trim().toLowerCase();
+
+        const password =
+            passwordInput.value;
+
+
+        if (!email || !password) {
+
+            showMessage(
+                "Please enter your email and password.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        loginButton.disabled = true;
+
+        loginButton.innerHTML =
+            '<span class="loader"></span> Logging in...';
+
+
+        try {
+
+            // -------------------------------------------------
+            // LOGIN REQUEST
+            // -------------------------------------------------
+
+            const response = await fetch("/api/login", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+
+            });
+
+
+            // -------------------------------------------------
+            // RESPONSE TYPE
+            // -------------------------------------------------
+
+            const contentType =
+                response.headers.get("content-type") || "";
+
+
+            if (!contentType.includes("application/json")) {
+
+                throw new Error(
+                    "Server returned an unexpected response."
+                );
+
+            }
+
+
+            // -------------------------------------------------
+            // READ RESPONSE
+            // -------------------------------------------------
+
+            const data =
+                await response.json();
+
+            console.log(
+                "Student login response:",
+                data
+            );
+
+
+            // -------------------------------------------------
+            // LOGIN FAILED
+            // -------------------------------------------------
+
+            if (
+                !response.ok ||
+                data.success === false
+            ) {
+
+                throw new Error(
+                    data.message ||
+                    "Invalid email or password."
+                );
+
+            }
+
+
+            // -------------------------------------------------
+            // TOKEN
+            // -------------------------------------------------
+
+            const token =
+                data.token ||
+                data.accessToken ||
+                data.authToken ||
+                data.sessionToken ||
+                "";
+
+
+            if (!token) {
+
+                console.error(
+                    "Login response contains no token:",
+                    data
+                );
+
+                throw new Error(
+                    "Login succeeded, but the server did not return a login token."
+                );
+
+            }
+
+
+            // -------------------------------------------------
+            // STUDENT DATA
+            // -------------------------------------------------
+
+            let student =
+                data.student ||
+                data.user ||
+                data.studentInformation ||
+                data.data ||
+                {};
+
+
+            if (
+                !student ||
+                typeof student !== "object" ||
+                Array.isArray(student)
+            ) {
+                student = {};
+            }
+
+
+            // -------------------------------------------------
+            // NORMALIZE STUDENT DATA
+            // -------------------------------------------------
+
+            student.email =
+                student.email ||
+                data.email ||
+                email;
+
+            student.name =
+                student.name ||
+                data.name ||
+                "";
+
+            student.studentId =
+                student.studentId ||
+                data.studentId ||
+                "";
+
+            student.phone =
+                student.phone ||
+                data.phone ||
+                "";
+
+            student.course =
+                student.course ||
+                data.course ||
+                "";
+
+            student.className =
+                student.className ||
+                data.className ||
+                "";
+
+            student.section =
+                student.section ||
+                data.section ||
+                "";
+
+            student.rollNumber =
+                student.rollNumber ||
+                data.rollNumber ||
+                "";
+
+            student.attendance =
+                student.attendance ??
+                data.attendance ??
+                "";
+
+            student.marks =
+                student.marks ??
+                data.marks ??
+                "";
+
+            student.gpa =
+                student.gpa ??
+                data.gpa ??
+                "";
+
+            student.feeBalance =
+                student.feeBalance ??
+                data.feeBalance ??
+                "";
+
+            student.admissionStatus =
+                student.admissionStatus ||
+                data.admissionStatus ||
+                "Pending";
+
+            student.status =
+                student.status ||
+                data.status ||
+                "Active";
+
+
+            // -------------------------------------------------
+            // CLEAR OLD STUDENT SESSION
+            // -------------------------------------------------
+
+            localStorage.removeItem("novaStudentToken");
+            localStorage.removeItem("novaToken");
+            localStorage.removeItem("studentToken");
+            localStorage.removeItem("authToken");
+            localStorage.removeItem("token");
+
+            localStorage.removeItem("novaStudent");
+            localStorage.removeItem("student");
+
+            localStorage.removeItem("novaStudentEmail");
+            localStorage.removeItem("novaStudentId");
+            localStorage.removeItem("novaStudentInformation");
+
+
+            // -------------------------------------------------
+            // SAVE STUDENT DATA
+            // -------------------------------------------------
+
+            localStorage.setItem(
+                "novaStudent",
+                JSON.stringify(student)
+            );
+
+            localStorage.setItem(
+                "student",
+                JSON.stringify(student)
+            );
+
+            localStorage.setItem(
+                "novaStudentEmail",
+                student.email
+            );
+
+
+            if (student.studentId) {
+
+                localStorage.setItem(
+                    "novaStudentId",
+                    student.studentId
+                );
+
+            }
+
+
+            // -------------------------------------------------
+            // SAVE STUDENT INFORMATION
+            // -------------------------------------------------
+
+            if (
+                data.studentInformation &&
+                typeof data.studentInformation === "object"
+            ) {
+
+                localStorage.setItem(
+                    "novaStudentInformation",
+                    JSON.stringify(
+                        data.studentInformation
+                    )
+                );
+
+            }
+
+
+            // -------------------------------------------------
+            // SAVE TOKEN
+            // -------------------------------------------------
+
+            localStorage.setItem(
+                "novaStudentToken",
+                token
+            );
+
+            localStorage.setItem(
+                "novaToken",
+                token
+            );
+
+            localStorage.setItem(
+                "studentToken",
+                token
+            );
+
+            localStorage.setItem(
+                "authToken",
+                token
+            );
+
+            localStorage.setItem(
+                "token",
+                token
+            );
+
+
+            // -------------------------------------------------
+            // VERIFY TOKEN
+            // -------------------------------------------------
+
+            const savedToken =
+                localStorage.getItem(
+                    "novaStudentToken"
+                );
+
+
+            if (!savedToken) {
+
+                throw new Error(
+                    "Student login token could not be saved. Please enable browser storage and try again."
+                );
+
+            }
+
+
+            console.log(
+                "Student authentication token saved."
+            );
+
+            console.log(
+                "Student:",
+                student
+            );
+
+
+            // -------------------------------------------------
+            // SUCCESS
+            // -------------------------------------------------
+
+            showMessage(
+                "Login successful! Opening your student dashboard...",
+                "success"
+            );
+
+
+            // -------------------------------------------------
+            // OPEN STUDENT DASHBOARD
+            // -------------------------------------------------
+
+            setTimeout(function () {
+
+                window.location.replace(
+                    "/dashboard.html"
+                );
+
+            }, 500);
+
+
+        } catch (error) {
+
+            console.error(
+                "Student login error:",
+                error
+            );
+
+            showMessage(
+                error.message ||
+                "Cannot connect to server. Make sure Node.js and MongoDB are running.",
+                "error"
+            );
+
+            loginButton.disabled = false;
+
+            loginButton.textContent =
+                "Login";
+
+        }
+
+    });
+
+
+    // =========================================================
+    // FORGOT PASSWORD
+    // =========================================================
+
+    forgotForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+            clearMessage();
+
+            const email =
+                forgotEmailInput.value
+                    .trim()
+                    .toLowerCase();
+
+
+            if (!email) {
+
+                showMessage(
+                    "Please enter your registered email address.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            const emailPattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+            if (!emailPattern.test(email)) {
+
+                showMessage(
+                    "Please enter a valid email address.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            forgotButton.disabled = true;
+
+            forgotButton.innerHTML =
+                '<span class="loader"></span> Sending...';
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/forgot-password",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json",
+
+                                "Accept":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                email: email
+                            })
+                        }
+                    );
+
+
+                const contentType =
+                    response.headers.get(
+                        "content-type"
+                    ) || "";
+
+
+                if (
+                    !contentType.includes(
+                        "application/json"
+                    )
+                ) {
+
+                    throw new Error(
+                        "Password reset service is not available."
+                    );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "Forgot password response:",
+                    data
+                );
+
+
+                if (
+                    !response.ok ||
+                    data.success === false
+                ) {
+
+                    throw new Error(
+                        data.message ||
+                        "Could not send the password reset request."
+                    );
+
+                }
+
+
+                showMessage(
+                    data.message ||
+                    "Your password reset request has been sent to Nova College administration.",
+                    "success"
+                );
+
+
+                forgotButton.textContent =
+                    "Send Again";
+
+
+            } catch (error) {
+
+                console.error(
+                    "Forgot password error:",
+                    error
+                );
+
+                showMessage(
+                    error.message ||
+                    "Cannot connect to the password reset service.",
+                    "error"
+                );
+
+                forgotButton.textContent =
+                    "Send Reset Request";
+
+            } finally {
+
+                forgotButton.disabled = false;
+
+            }
+
+        }
+    );
+
+});
+</script>
+
+</body>
+</html>

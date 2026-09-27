@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+
+```
+<title>Nova College | Admin Login</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        min-height: 100vh;
+        font-family: Arial, Helvetica, sans-serif;
+
+        background:
+            linear-gradient(
+                135deg,
+                rgba(0, 40, 85, 0.95),
+                rgba(0, 88, 122, 0.90)
+            ),
+            url("nova.jpeg") center/cover no-repeat;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 20px;
+    }
+
+    .login-container {
+        width: 100%;
+        max-width: 430px;
+    }
+
+    .login-card {
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 35px;
+
+        box-shadow:
+            0 20px 60px rgba(0, 0, 0, 0.30);
+    }
+
+    .logo-box {
+        text-align: center;
+        margin-bottom: 22px;
+    }
+
+    .logo {
+        width: 90px;
+        height: 90px;
+
+        object-fit: contain;
+
+        border-radius: 50%;
+        background: #ffffff;
+
+        padding: 5px;
+
+        box-shadow:
+            0 5px 18px rgba(0, 0, 0, 0.15);
+    }
+
+    h1 {
+        text-align: center;
+
+        color: #0b3d66;
+
+        font-size: 28px;
+
+        margin-bottom: 6px;
+    }
+
+    .subtitle {
+        text-align: center;
+
+        color: #666;
+
+        font-size: 14px;
+
+        margin-bottom: 28px;
+    }
+
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+    label {
+        display: block;
+
+        font-weight: bold;
+
+        color: #333;
+
+        margin-bottom: 8px;
+
+        font-size: 14px;
+    }
+
+    input {
+        width: 100%;
+        height: 48px;
+
+        border: 1px solid #d6dbe1;
+
+        border-radius: 9px;
+
+        padding: 0 14px;
+
+        font-size: 15px;
+
+        outline: none;
+
+        transition: 0.2s;
+    }
+
+    input:focus {
+        border-color: #0b70b7;
+
+        box-shadow:
+            0 0 0 3px rgba(11, 112, 183, 0.10);
+    }
+
+    .password-wrapper {
+        position: relative;
+    }
+
+    .password-wrapper input {
+        padding-right: 75px;
+    }
+
+    .show-password {
+        position: absolute;
+
+        right: 10px;
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        border: none;
+
+        background: transparent;
+
+        color: #0b70b7;
+
+        font-weight: bold;
+
+        cursor: pointer;
+
+        padding: 7px;
+    }
+
+    .show-password:hover {
+        color: #095d98;
+    }
+
+    .login-btn {
+        width: 100%;
+        height: 50px;
+
+        border: none;
+
+        border-radius: 9px;
+
+        background: #0b70b7;
+
+        color: white;
+
+        font-size: 16px;
+
+        font-weight: bold;
+
+        cursor: pointer;
+
+        transition: 0.2s;
+
+        margin-top: 5px;
+    }
+
+    .login-btn:hover {
+        background: #095d98;
+    }
+
+    .login-btn:disabled {
+        background: #8aaec7;
+
+        cursor: not-allowed;
+    }
+
+    .message {
+        display: none;
+
+        margin-bottom: 18px;
+
+        padding: 12px 14px;
+
+        border-radius: 8px;
+
+        font-size: 14px;
+
+        line-height: 1.5;
+    }
+
+    .message.show {
+        display: block;
+    }
+
+    .message.error {
+        background: #ffe8e8;
+
+        color: #a40000;
+
+        border: 1px solid #ffbaba;
+    }
+
+    .message.success {
+        background: #e8fff0;
+
+        color: #08752f;
+
+        border: 1px solid #a9e9bd;
+    }
+
+    .message.info {
+        background: #e9f4ff;
+
+        color: #075b99;
+
+        border: 1px solid #b8ddfa;
+    }
+
+    .back-link {
+        display: block;
+
+        text-align: center;
+
+        margin-top: 22px;
+
+        color: #0b70b7;
+
+        text-decoration: none;
+
+        font-size: 14px;
+    }
+
+    .back-link:hover {
+        text-decoration: underline;
+    }
+
+    .security-note {
+        text-align: center;
+
+        margin-top: 20px;
+
+        color: #888;
+
+        font-size: 12px;
+    }
+
+    .loading {
+        pointer-events: none;
+    }
+
+    @media (max-width: 500px) {
+        .login-card {
+            padding: 25px 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+```
+<div class="login-card">
+
+    <div class="logo-box">
+        <img
+            src="nova.jpeg"
+            alt="Nova College"
+            class="logo"
+            onerror="this.style.display='none';"
+        >
+    </div>
+
+    <h1>Admin Login</h1>
+
+    <p class="subtitle">
+        Nova College Administration Portal
+    </p>
+
+    <div
+        id="message"
+        class="message"
+    ></div>
+
+    <form
+        id="loginForm"
+        autocomplete="off"
+    >
+
+        <div class="form-group">
+
+            <label for="email">
+                Admin Email
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter admin email"
+                autocomplete="username"
+                required
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="password">
+                Admin Password
+            </label>
+
+            <div class="password-wrapper">
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter admin password"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <button
+                    type="button"
+                    class="show-password"
+                    id="showPassword"
+                >
+                    Show
+                </button>
+
+            </div>
+
+        </div>
+
+        <button
+            type="submit"
+            class="login-btn"
+            id="loginBtn"
+        >
+            Login
+        </button>
+
+    </form>
+
+    <a
+        href="/index.html"
+        class="back-link"
+    >
+        ← Back to Nova College
+    </a>
+
+    <div class="security-note">
+        Protected administrator area
+    </div>
+
+</div>
+```
+
+</div>
+
+<script>
+"use strict";
+
+/*
+============================================================
+NOVA COLLEGE
+ADMIN LOGIN
+
+AUTHENTICATION METHOD:
+Secure HttpOnly admin cookie.
+
+The admin token is NOT stored in JavaScript storage.
+
+The browser automatically sends the HttpOnly cookie
+with same-origin requests.
+============================================================
+*/
+
+
+/* ============================================================
+   ELEMENTS
+============================================================ */
+
+const loginForm =
+    document.getElementById("loginForm");
+
+const emailInput =
+    document.getElementById("email");
+
+const passwordInput =
+    document.getElementById("password");
+
+const loginBtn =
+    document.getElementById("loginBtn");
+
+const showPasswordBtn =
+    document.getElementById("showPassword");
+
+const messageBox =
+    document.getElementById("message");
+
+
+/* ============================================================
+   SHOW MESSAGE
+============================================================ */
+
+function showMessage(message, type = "info") {
+
+    messageBox.textContent =
+        String(message || "");
+
+    messageBox.className =
+        "message show " + type;
+}
+
+
+/* ============================================================
+   HIDE MESSAGE
+============================================================ */
+
+function hideMessage() {
+
+    messageBox.textContent = "";
+
+    messageBox.className =
+        "message";
+}
+
+
+/* ============================================================
+   READ RESPONSE SAFELY
+============================================================ */
+
+async function readJson(response) {
+
+    const text =
+        await response.text();
+
+    if (!text) {
+        return {};
+    }
+
+    try {
+
+        return JSON.parse(text);
+
+    } catch (error) {
+
+        return {
+            success: false,
+            message: text
+        };
+    }
+}
+
+
+/* ============================================================
+   VERIFY ADMIN SESSION
+============================================================ */
+
+async function verifyAdminSession() {
+
+    const response =
+        await fetch(
+            "/api/admin/session",
+            {
+                method: "GET",
+
+                headers: {
+                    "Accept": "application/json"
+                },
+
+                credentials: "same-origin",
+
+                cache: "no-store"
+            }
+        );
+
+
+    const data =
+        await readJson(response);
+
+
+    if (
+        !response.ok ||
+        data.success !== true ||
+        data.authenticated !== true
+    ) {
+
+        throw new Error(
+            data.message ||
+            "No active admin session."
+        );
+    }
+
+
+    return data;
+}
+
+
+/* ============================================================
+   CHECK EXISTING SESSION
+============================================================ */
+
+async function checkExistingSession() {
+
+    try {
+
+        const data =
+            await verifyAdminSession();
+
+
+        if (
+            data.authenticated === true
+        ) {
+
+            showMessage(
+                "Admin session found. Opening dashboard...",
+                "success"
+            );
+
+
+            /*
+            Store ONLY non-sensitive information.
+            The actual authentication cookie remains
+            HttpOnly and cannot be read by JavaScript.
+            */
+
+            if (data.admin) {
+
+                try {
+
+                    sessionStorage.setItem(
+                        "novaAdmin",
+                        JSON.stringify(
+                            data.admin
+                        )
+                    );
+
+                } catch (error) {
+
+                    console.warn(
+                        "Could not save admin information:",
+                        error
+                    );
+                }
+
+
+                if (data.admin.email) {
+
+                    try {
+
+                        sessionStorage.setItem(
+                            "novaAdminEmail",
+                            data.admin.email
+                        );
+
+                    } catch (error) {
+
+                        console.warn(
+                            "Could not save admin email:",
+                            error
+                        );
+                    }
+                }
+            }
+
+
+            window.location.replace(
+                "/admin-dashboard.html"
+            );
+
+            return;
+        }
+
+    } catch (error) {
+
+        /*
+        No active session is normal when the
+        administrator has not logged in.
+        */
+
+        console.log(
+            "No existing admin session."
+        );
+    }
+
+
+    hideMessage();
+}
+
+
+/* ============================================================
+   SHOW / HIDE PASSWORD
+============================================================ */
+
+showPasswordBtn.addEventListener(
+    "click",
+    function () {
+
+        const isVisible =
+            passwordInput.type === "text";
+
+
+        passwordInput.type =
+            isVisible
+                ? "password"
+                : "text";
+
+
+        showPasswordBtn.textContent =
+            isVisible
+                ? "Show"
+                : "Hide";
+    }
+);
+
+
+/* ============================================================
+   ADMIN LOGIN
+============================================================ */
+
+loginForm.addEventListener(
+    "submit",
+    async function (event) {
+
+        event.preventDefault();
+
+        hideMessage();
+
+
+        const email =
+            emailInput.value
+                .trim()
+                .toLowerCase();
+
+
+        const password =
+            passwordInput.value;
+
+
+        /* ----------------------------------------------------
+           VALIDATION
+        ---------------------------------------------------- */
+
+        if (!email) {
+
+            showMessage(
+                "Please enter the admin email.",
+                "error"
+            );
+
+            emailInput.focus();
+
+            return;
+        }
+
+
+        if (!password) {
+
+            showMessage(
+                "Please enter the admin password.",
+                "error"
+            );
+
+            passwordInput.focus();
+
+            return;
+        }
+
+
+        /* ----------------------------------------------------
+           LOADING STATE
+        ---------------------------------------------------- */
+
+        loginBtn.disabled = true;
+
+        loginBtn.classList.add(
+            "loading"
+        );
+
+        loginBtn.textContent =
+            "Signing in...";
+
+
+        try {
+
+            /* =================================================
+               LOGIN REQUEST
+            ================================================= */
+
+            const response =
+                await fetch(
+                    "/api/admin/login",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json",
+
+                            "Accept":
+                                "application/json"
+                        },
+
+                        /*
+                        VERY IMPORTANT:
+
+                        Allows browser to receive and use
+                        the HttpOnly admin cookie.
+                        */
+
+                        credentials:
+                            "same-origin",
+
+                        cache:
+                            "no-store",
+
+                        body:
+                            JSON.stringify({
+                                email: email,
+                                password: password
+                            })
+                    }
+                );
+
+
+            /* =================================================
+               READ SERVER RESPONSE
+            ================================================= */
+
+            const data =
+                await readJson(response);
+
+
+            console.log(
+                "Admin login response:",
+                data
+            );
+
+
+            /* =================================================
+               CHECK LOGIN RESULT
+            ================================================= */
+
+            if (
+                !response.ok ||
+                data.success !== true
+            ) {
+
+                throw new Error(
+                    data.message ||
+                    data.error ||
+                    "Invalid admin credentials."
+                );
+            }
+
+
+            /* =================================================
+               LOGIN SUCCESSFUL
+            ================================================= */
+
+            loginBtn.textContent =
+                "Verifying...";
+
+
+            /* =================================================
+               VERIFY COOKIE SESSION
+            ================================================= */
+
+            const verified =
+                await verifyAdminSession();
+
+
+            if (
+                verified.authenticated !== true
+            ) {
+
+                throw new Error(
+                    "Admin login succeeded, but the admin session could not be verified."
+                );
+            }
+
+
+            /* =================================================
+               SAVE NON-SENSITIVE ADMIN INFORMATION
+            ================================================= */
+
+            if (verified.admin) {
+
+                try {
+
+                    sessionStorage.setItem(
+                        "novaAdmin",
+                        JSON.stringify(
+                            verified.admin
+                        )
+                    );
+
+                } catch (error) {
+
+                    console.warn(
+                        "Could not save admin information:",
+                        error
+                    );
+                }
+
+
+                if (
+                    verified.admin.email
+                ) {
+
+                    try {
+
+                        sessionStorage.setItem(
+                            "novaAdminEmail",
+                            verified.admin.email
+                        );
+
+                    } catch (error) {
+
+                        console.warn(
+                            "Could not save admin email:",
+                            error
+                        );
+                    }
+                }
+
+            } else {
+
+                try {
+
+                    sessionStorage.setItem(
+                        "novaAdminEmail",
+                        email
+                    );
+
+                } catch (error) {
+
+                    console.warn(
+                        "Could not save admin email:",
+                        error
+                    );
+                }
+            }
+
+
+            /* =================================================
+               SUCCESS
+            ================================================= */
+
+            showMessage(
+                "Admin login successful. Opening dashboard...",
+                "success"
+            );
+
+
+            loginBtn.textContent =
+                "Opening dashboard...";
+
+
+            setTimeout(
+                function () {
+
+                    window.location.replace(
+                        "/admin-dashboard.html"
+                    );
+
+                },
+                400
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Admin login error:",
+                error
+            );
+
+
+            let errorMessage =
+                error.message ||
+                "Admin login failed.";
+
+
+            /*
+            Handle connection errors separately.
+            */
+
+            if (
+                error.name === "TypeError" ||
+                errorMessage.includes("Failed to fetch") ||
+                errorMessage.includes("NetworkError")
+            ) {
+
+                errorMessage =
+                    "Connection error. Make sure the Nova College server is running on port 5000.";
+            }
+
+
+            showMessage(
+                errorMessage,
+                "error"
+            );
+
+
+            loginBtn.disabled =
+                false;
+
+            loginBtn.classList.remove(
+                "loading"
+            );
+
+            loginBtn.textContent =
+                "Login";
+        }
+
+    }
+);
+
+
+/* ============================================================
+   START PAGE
+============================================================ */
+
+checkExistingSession();
+
+</script>
+
+</body>
+</html>

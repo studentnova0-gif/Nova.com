@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student ID | Nova College</title>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #eff3ff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .form-card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 420px;
+      padding: 32px;
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(30, 58, 138, 0.15);
+      border-top: 5px solid #d4a017;
+    }
+
+    .form-card h2 {
+      color: #1e3a8a;
+      margin-bottom: 6px;
+    }
+
+    .form-card p.sub {
+      color: #64748b;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .form-group { margin-bottom: 18px; }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      color: #1e293b;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-group input:focus {
+      border-color: #1e3a8a;
+      box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.15);
+    }
+
+    .form-group input.invalid { border-color: #dc2626; }
+
+    .error-message {
+      color: #dc2626;
+      font-size: 13px;
+      display: block;
+      margin-top: 5px;
+      min-height: 16px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 13px;
+      background: #1e3a8a;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .submit-btn:hover { background: #172d6b; }
+
+    .success-message {
+      display: none;
+      margin-top: 16px;
+      padding: 12px;
+      background: #dcfce7;
+      color: #166534;
+      border-radius: 8px;
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="form-card">
+    <h2>Student Verification</h2>
+    <p class="sub">Enter your Student ID to continue.</p>
+
+    <form id="studentForm" novalidate>
+
+      <div class="form-group">
+        <label for="studentId">Student ID</label>
+        <input
+          type="text"
+          id="studentId"
+          name="studentId"
+          placeholder="Enter your Student ID"
+          autocomplete="off"
+        >
+        <small class="error-message" id="studentIdError"></small>
+      </div>
+
+      <button type="submit" class="submit-btn">Submit</button>
+
+      <div class="success-message" id="successMessage"></div>
+
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById("studentForm");
+    const input = document.getElementById("studentId");
+    const error = document.getElementById("studentIdError");
+    const success = document.getElementById("successMessage");
+
+    function validateStudentId() {
+      const value = input.value.trim();
+
+      if (value === "") {
+        error.textContent = "❌ Student ID is required.";
+        input.classList.add("invalid");
+        return false;
+      }
+
+      error.textContent = "";
+      input.classList.remove("invalid");
+      return true;
+    }
+
+    // Clear the error as soon as the student starts typing
+    input.addEventListener("input", function () {
+      if (input.value.trim() !== "") {
+        error.textContent = "";
+        input.classList.remove("invalid");
+      }
+    });
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      success.style.display = "none";
+
+      if (!validateStudentId()) {
+        input.focus();
+        return;
+      }
+
+      const studentId = input.value.trim();
+
+      // ---------------------------------------------------------
+      // Here you can send the Student ID to your server, e.g.:
+      //
+      // fetch("/api/your-route", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({ studentId: studentId })
+      // })
+      //   .then(res => res.json())
+      //   .then(data => console.log(data));
+      // ---------------------------------------------------------
+
+      success.textContent = "✅ Student ID submitted: " + studentId;
+      success.style.display = "block";
+    });
+  </script>
+
+</body>
+</html>

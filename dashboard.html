@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>Nova College | Student Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        .topbar {
+            background: #111;
+            color: #fff;
+            padding: 16px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .logout-btn {
+            border: none;
+            background: #dc3545;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: #b02a37;
+        }
+
+        .container {
+            width: 94%;
+            max-width: 1200px;
+            margin: 25px auto;
+        }
+
+        .welcome {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        .welcome h1 {
+            margin-bottom: 8px;
+            font-size: 28px;
+        }
+
+        .welcome p {
+            color: #666;
+        }
+
+        .student-id {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 12px;
+            background: #eef3ff;
+            color: #244a9b;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        .card.full {
+            grid-column: 1 / -1;
+        }
+
+        .card h2 {
+            margin-bottom: 18px;
+            font-size: 21px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 12px;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .info-box .label {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .info-box .value {
+            font-size: 16px;
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        .status-boxes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .status-card {
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+        }
+
+        .status-card .label {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .status-card .value {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .payment-table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        th {
+            background: #f8f9fa;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .badge.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .badge.approved {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .badge.rejected {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        .badge.active {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .badge.inactive {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 25px;
+            color: #777;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+            color: #555;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #842029;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        footer {
+            background: #111;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 800px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card.full {
+                grid-column: auto;
+            }
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .status-boxes {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                padding: 14px;
+            }
+
+            .brand {
+                font-size: 18px;
+            }
+
+            .welcome h1 {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="topbar">
+    <div class="brand">Nova College Student Portal</div>
+
+    <button
+        class="logout-btn"
+        id="logoutBtn"
+        type="button"
+    >
+        Logout
+    </button>
+</header>
+
+<main class="container">
+
+    <div
+        id="errorMessage"
+        class="error"
+    ></div>
+
+    <div
+        id="loadingMessage"
+        class="loading"
+    >
+        Loading student dashboard...
+    </div>
+
+    <section
+        id="dashboardContent"
+        style="display:none;"
+    >
+
+        <!-- WELCOME -->
+        <div class="welcome">
+            <h1>
+                Welcome,
+                <span id="studentName">—</span>
+            </h1>
+
+            <p>
+                Welcome to your Nova College Student Dashboard.
+            </p>
+
+            <div class="student-id">
+                Student ID:
+                <span id="studentIdDisplay">—</span>
+            </div>
+        </div>
+
+        <div class="grid">
+
+            <!-- PROFILE -->
+            <div class="card">
+                <h2>Student Profile</h2>
+
+                <div class="profile-grid">
+
+                    <div class="info-box">
+                        <div class="label">Student ID</div>
+                        <div
+                            class="value"
+                            id="profileId"
+                        >—</div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="label">Name</div>
+                        <div
+                            class="value"
+                            id="profileName"
+                        >—</div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="label">Email</div>
+                        <div
+                            class="value"
+                            id="profileEmail"
+                        >—</div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="label">Phone</div>
+                        <div
+                            class="value"
+                            id="profilePhone"
+                        >—</div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="label">Course</div>
+                        <div
+                            class="value"
+                            id="profileCourse"
+                        >—</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- STATUS -->
+            <div class="card">
+                <h2>Admission & Account</h2>
+
+                <div class="status-boxes">
+
+                    <div class="status-card">
+                        <div class="label">
+                            Admission Status
+                        </div>
+
+                        <div
+                            class="value"
+                            id="admissionStatus"
+                        >
+                            Pending
+                        </div>
+                    </div>
+
+                    <div class="status-card">
+                        <div class="label">
+                            Account Status
+                        </div>
+
+                        <div
+                            class="value"
+                            id="accountStatus"
+                        >
+                            Active
+                        </div>
+                    </div>
+
+                    <div class="status-card">
+                        <div class="label">
+                            Fee Balance
+                        </div>
+
+                        <div
+                            class="value"
+                            id="feeBalance"
+                        >
+                            Rs 0
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ACADEMIC INFORMATION -->
+            <div class="card full">
+                <h2>Academic Information</h2>
+
+                <div class="profile-grid">
+
+                    <div class="info-box">
+                        <div class="label">Class</div>
+                        <div
+                            class="value"
+                            id="className"
+                        >—</div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="label">Section</div>
+                        <div
+                            class="value"
+                            id="section"
+                        >—</div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="label">Roll Number</div>
+                        <div
+                            class="value"
+                            id="rollNumber"
+                        >—</div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="label">Marks</div>
+                        <div
+                            class="value"
+                            id="marks"
+                        >—</div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="label">GPA</div>
+                        <div
+                            class="value"
+                            id="gpa"
+                        >—</div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="label">Attendance</div>
+                        <div
+                            class="value"
+                            id="attendance"
+                        >0%</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- PAYMENT -->
+            <div class="card full">
+                <h2>Payment History</h2>
+
+                <div class="payment-table-wrapper">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Amount</th>
+                                <th>Method</th>
+                                <th>Status</th>
+                                <th>Transaction ID</th>
+                                <th>Bank</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="paymentsBody">
+                            <tr>
+                                <td
+                                    colspan="6"
+                                    class="empty"
+                                >
+                                    Loading payments...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    Nova College of Science
+    <br>
+    Student Portal
+</footer>
+
+
+<script>
+"use strict";
+
+/* ============================================================
+   GLOBAL VARIABLES
+============================================================ */
+
+let currentStudent = null;
+let currentInformation = null;
+let currentPayments = [];
+
+
+/* ============================================================
+   SAFE TEXT
+============================================================ */
+
+function safeText(value) {
+    if (
+        value === null ||
+        value === undefined ||
+        value === ""
+    ) {
+        return "—";
+    }
+
+    return String(value);
+}
+
+
+/* ============================================================
+   GET STUDENT TOKEN
+============================================================ */
+
+function getStudentToken() {
+
+    const keys = [
+        "studentToken",
+        "student_token",
+        "STUDENT_TOKEN",
+        "authToken",
+        "token"
+    ];
+
+    for (const key of keys) {
+
+        const localValue =
+            localStorage.getItem(key);
+
+        if (localValue) {
+            return localValue;
+        }
+
+        const sessionValue =
+            sessionStorage.getItem(key);
+
+        if (sessionValue) {
+            return sessionValue;
+        }
+    }
+
+    return null;
+}
+
+
+/* ============================================================
+   API REQUEST
+============================================================ */
+
+async function apiRequest(
+    url,
+    options = {}
+) {
+
+    const token =
+        getStudentToken();
+
+    const headers = {
+        "Accept": "application/json",
+        ...(options.headers || {})
+    };
+
+    if (token) {
+
+        headers["Authorization"] =
+            "Bearer " + token;
+
+        headers["X-Student-Token"] =
+            token;
+    }
+
+    const response =
+        await fetch(
+            url,
+            {
+                ...options,
+                headers,
+                credentials: "include",
+                cache: "no-store"
+            }
+        );
+
+    let data = null;
+
+    const contentType =
+        response.headers.get(
+            "content-type"
+        ) || "";
+
+    if (
+        contentType.includes(
+            "application/json"
+        )
+    ) {
+        data = await response.json();
+    } else {
+
+        const text =
+            await response.text();
+
+        try {
+            data = JSON.parse(text);
+        } catch {
+            data = {
+                success: false,
+                message: text
+            };
+        }
+    }
+
+    if (
+        response.status === 401 ||
+        response.status === 403
+    ) {
+
+        clearStudentSession();
+
+        window.location.href =
+            "/loginform.html";
+
+        throw new Error(
+            "Student authentication required."
+        );
+    }
+
+    if (!response.ok) {
+
+        throw new Error(
+            data?.message ||
+            data?.error ||
+            "API request failed."
+        );
+    }
+
+    return data;
+}
+
+
+/* ============================================================
+   CHECK STUDENT SESSION
+============================================================ */
+
+async function checkStudentSession() {
+
+    const token =
+        getStudentToken();
+
+    if (!token) {
+
+        /*
+         * Try existing cookie session.
+         * The server may authenticate using
+         * nova_student_session.
+         */
+    }
+
+    const data =
+        await apiRequest(
+            "/api/student/me"
+        );
+
+    if (
+        !data ||
+        data.success === false
+    ) {
+        throw new Error(
+            data?.message ||
+            "Student authentication failed."
+        );
+    }
+
+    /*
+     * YOUR API RESPONSE:
+     *
+     * {
+     *   success: true,
+     *   authenticated: true,
+     *   student: {...},
+     *   information: {...},
+     *   data: {
+     *      student: {...},
+     *      information: {...}
+     *   }
+     * }
+     */
+
+    currentStudent =
+        data.student ||
+        data.data?.student ||
+        data.user ||
+        null;
+
+    currentInformation =
+        data.information ||
+        data.data?.information ||
+        null;
+
+    if (!currentStudent) {
+
+        throw new Error(
+            "Student information was not returned by the server."
+        );
+    }
+
+    /*
+     * Save a compatible local copy.
+     */
+
+    try {
+
+        localStorage.setItem(
+            "novaStudent",
+            JSON.stringify(
+                currentStudent
+            )
+        );
+
+        localStorage.setItem(
+            "student",
+            JSON.stringify(
+                currentStudent
+            )
+        );
+
+        if (
+            currentStudent.studentId
+        ) {
+            localStorage.setItem(
+                "novaStudentId",
+                currentStudent.studentId
+            );
+        }
+
+        if (
+            currentStudent.email
+        ) {
+            localStorage.setItem(
+                "novaStudentEmail",
+                currentStudent.email
+            );
+        }
+
+    } catch (error) {
+
+        console.warn(
+            "Could not save student data:",
+            error
+        );
+    }
+
+    return data;
+}
+
+
+/* ============================================================
+   FETCH STUDENT INFORMATION
+============================================================ */
+
+async function fetchStudentInformation() {
+
+    const data =
+        await apiRequest(
+            "/api/student/information"
+        );
+
+    /*
+     * Expected:
+     *
+     * {
+     *   success: true,
+     *   information: {...},
+     *   data: {...}
+     * }
+     */
+
+    currentInformation =
+        data.information ||
+        data.data?.information ||
+        data.data ||
+        currentInformation ||
+        {};
+
+    return currentInformation;
+}
+
+
+/* ============================================================
+   FETCH PAYMENTS
+============================================================ */
+
+async function fetchPayments() {
+
+    const data =
+        await apiRequest(
+            "/api/student/payments"
+        );
+
+    /*
+     * Accept several backend formats.
+     */
+
+    if (Array.isArray(data)) {
+
+        currentPayments = data;
+
+    } else if (
+        Array.isArray(data.payments)
+    ) {
+
+        currentPayments =
+            data.payments;
+
+    } else if (
+        Array.isArray(data.data)
+    ) {
+
+        currentPayments =
+            data.data;
+
+    } else if (
+        Array.isArray(data.data?.payments)
+    ) {
+
+        currentPayments =
+            data.data.payments;
+
+    } else {
+
+        currentPayments = [];
+    }
+
+    return currentPayments;
+}
+
+
+/* ============================================================
+   RENDER STUDENT
+============================================================ */
+
+function renderStudent(
+    student,
+    information
+) {
+
+    student =
+        student || {};
+
+    information =
+        information || {};
+
+    const studentId =
+        student.studentId ||
+        information.studentId ||
+        "—";
+
+    const name =
+        student.name ||
+        information.name ||
+        "—";
+
+    const email =
+        student.email ||
+        information.email ||
+        "—";
+
+    const phone =
+        student.phone ||
+        information.phone ||
+        "—";
+
+    const course =
+        student.course ||
+        information.course ||
+        "—";
+
+    /*
+     * STATUS MUST COME FROM STUDENT FIRST.
+     */
+
+    const accountStatus =
+        student.status ||
+        "Active";
+
+    /*
+     * ADMISSION STATUS CAN COME FROM
+     * INFORMATION OR STUDENT.
+     */
+
+    const admissionStatus =
+        information.admissionStatus ||
+        student.admissionStatus ||
+        "Pending";
+
+    /*
+     * IMPORTANT:
+     * Fee balance comes from StudentInformation,
+     * NOT from Student.
+     */
+
+    const feeBalance =
+        information.feeBalance !== undefined &&
+        information.feeBalance !== null
+            ? information.feeBalance
+            : 0;
+
+
+    document.getElementById(
+        "studentName"
+    ).textContent =
+        safeText(name);
+
+    document.getElementById(
+        "studentIdDisplay"
+    ).textContent =
+        safeText(studentId);
+
+    document.getElementById(
+        "profileId"
+    ).textContent =
+        safeText(studentId);
+
+    document.getElementById(
+        "profileName"
+    ).textContent =
+        safeText(name);
+
+    document.getElementById(
+        "profileEmail"
+    ).textContent =
+        safeText(email);
+
+    document.getElementById(
+        "profilePhone"
+    ).textContent =
+        safeText(phone);
+
+    document.getElementById(
+        "profileCourse"
+    ).textContent =
+        safeText(course);
+
+    document.getElementById(
+        "admissionStatus"
+    ).textContent =
+        safeText(admissionStatus);
+
+    document.getElementById(
+        "accountStatus"
+    ).textContent =
+        safeText(accountStatus);
+
+    document.getElementById(
+        "feeBalance"
+    ).textContent =
+        "Rs " +
+        Number(feeBalance || 0)
+            .toLocaleString();
+}
+
+
+/* ============================================================
+   RENDER ACADEMIC INFORMATION
+============================================================ */
+
+function renderInformation(
+    information
+) {
+
+    information =
+        information || {};
+
+    const classValue =
+        information.className ||
+        information.class ||
+        "";
+
+    const section =
+        information.section ||
+        "";
+
+    const rollNumber =
+        information.rollNumber ||
+        "";
+
+    const marks =
+        information.marks ||
+        "";
+
+    const gpa =
+        information.gpa ||
+        "";
+
+    const attendance =
+        information.attendance ||
+        "0%";
+
+
+    document.getElementById(
+        "className"
+    ).textContent =
+        safeText(classValue);
+
+    document.getElementById(
+        "section"
+    ).textContent =
+        safeText(section);
+
+    document.getElementById(
+        "rollNumber"
+    ).textContent =
+        safeText(rollNumber);
+
+    document.getElementById(
+        "marks"
+    ).textContent =
+        safeText(marks);
+
+    document.getElementById(
+        "gpa"
+    ).textContent =
+        safeText(gpa);
+
+    document.getElementById(
+        "attendance"
+    ).textContent =
+        safeText(attendance);
+}
+
+
+/* ============================================================
+   PAYMENT STATUS BADGE
+============================================================ */
+
+function paymentStatusBadge(
+    status
+) {
+
+    const value =
+        String(
+            status || "Pending"
+        );
+
+    const lower =
+        value.toLowerCase();
+
+    let className =
+        "pending";
+
+    if (
+        lower === "approved"
+    ) {
+        className =
+            "approved";
+    }
+
+    if (
+        lower === "rejected"
+    ) {
+        className =
+            "rejected";
+    }
+
+    return `
+        <span class="badge ${className}">
+            ${safeText(value)}
+        </span>
+    `;
+}
+
+
+/* ============================================================
+   RENDER PAYMENTS
+============================================================ */
+
+function renderPayments(
+    payments
+) {
+
+    const body =
+        document.getElementById(
+            "paymentsBody"
+        );
+
+    if (!body) {
+        return;
+    }
+
+    payments =
+        Array.isArray(payments)
+            ? payments
+            : [];
+
+    if (
+        payments.length === 0
+    ) {
+
+        body.innerHTML = `
+            <tr>
+                <td
+                    colspan="6"
+                    class="empty"
+                >
+                    No payment records found.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    body.innerHTML =
+        payments.map(
+            payment => {
+
+                const amount =
+                    Number(
+                        payment.amount || 0
+                    ).toLocaleString();
+
+                const method =
+                    payment.paymentMethod ||
+                    payment.method ||
+                    "Bank";
+
+                const status =
+                    payment.status ||
+                    "Pending";
+
+                const transactionId =
+                    payment.transactionId ||
+                    "—";
+
+                const bankName =
+                    payment.bankName ||
+                    "Meezan Bank";
+
+                const rawDate =
+                    payment.createdAt ||
+                    payment.date ||
+                    payment.updatedAt ||
+                    "";
+
+                let date =
+                    "—";
+
+                if (rawDate) {
+
+                    const parsed =
+                        new Date(rawDate);
+
+                    if (
+                        !Number.isNaN(
+                            parsed.getTime()
+                        )
+                    ) {
+                        date =
+                            parsed.toLocaleDateString();
+                    }
+                }
+
+                return `
+                    <tr>
+                        <td>
+                            Rs ${amount}
+                        </td>
+
+                        <td>
+                            ${safeText(method)}
+                        </td>
+
+                        <td>
+                            ${paymentStatusBadge(status)}
+                        </td>
+
+                        <td>
+                            ${safeText(transactionId)}
+                        </td>
+
+                        <td>
+                            ${safeText(bankName)}
+                        </td>
+
+                        <td>
+                            ${safeText(date)}
+                        </td>
+                    </tr>
+                `;
+            }
+        ).join("");
+}
+
+
+/* ============================================================
+   CLEAR SESSION
+============================================================ */
+
+function clearStudentSession() {
+
+    const keys = [
+        "studentToken",
+        "student_token",
+        "STUDENT_TOKEN",
+        "authToken",
+        "token",
+        "novaStudent",
+        "student",
+        "novaStudentEmail",
+        "novaStudentId"
+    ];
+
+    keys.forEach(
+        key => {
+
+            localStorage.removeItem(key);
+            sessionStorage.removeItem(key);
+
+        }
+    );
+}
+
+
+/* ============================================================
+   LOGOUT
+============================================================ */
+
+async function logoutStudent() {
+
+    const button =
+        document.getElementById(
+            "logoutBtn"
+        );
+
+    if (button) {
+        button.disabled = true;
+        button.textContent =
+            "Logging out...";
+    }
+
+    try {
+
+        await fetch(
+            "/api/student/logout",
+            {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Accept":
+                        "application/json"
+                }
+            }
+        );
+
+    } catch (error) {
+
+        console.warn(
+            "Logout request failed:",
+            error
+        );
+
+    } finally {
+
+        clearStudentSession();
+
+        window.location.href =
+            "/loginform.html";
+    }
+}
+
+
+/* ============================================================
+   SHOW ERROR
+============================================================ */
+
+function showError(
+    message
+) {
+
+    const errorBox =
+        document.getElementById(
+            "errorMessage"
+        );
+
+    if (!errorBox) {
+        return;
+    }
+
+    errorBox.textContent =
+        safeText(message);
+
+    errorBox.style.display =
+        "block";
+}
+
+
+/* ============================================================
+   LOAD DASHBOARD
+============================================================ */
+
+async function loadDashboard() {
+
+    const loading =
+        document.getElementById(
+            "loadingMessage"
+        );
+
+    const content =
+        document.getElementById(
+            "dashboardContent"
+        );
+
+    try {
+
+        /*
+         * FIRST:
+         * Get authenticated student.
+         */
+
+        await checkStudentSession();
+
+
+        /*
+         * SECOND:
+         * Get information and payments.
+         *
+         * If one fails, the other can still
+         * display.
+         */
+
+        const results =
+            await Promise.allSettled([
+                fetchStudentInformation(),
+                fetchPayments()
+            ]);
+
+
+        /*
+         * Render student immediately.
+         */
+
+        renderStudent(
+            currentStudent,
+            currentInformation
+        );
+
+
+        /*
+         * Render academic information.
+         */
+
+        renderInformation(
+            currentInformation
+        );
+
+
+        /*
+         * Render payment result.
+         */
+
+        if (
+            results[1].status ===
+            "fulfilled"
+        ) {
+
+            renderPayments(
+                currentPayments
+            );
+
+        } else {
+
+            console.error(
+                "Payment API error:",
+                results[1].reason
+            );
+
+            renderPayments([]);
+
+        }
+
+
+        /*
+         * Hide loading.
+         */
+
+        if (loading) {
+            loading.style.display =
+                "none";
+        }
+
+        if (content) {
+            content.style.display =
+                "block";
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Dashboard loading error:",
+            error
+        );
+
+        if (loading) {
+            loading.style.display =
+                "none";
+        }
+
+        showError(
+            error.message ||
+            "Unable to load student dashboard."
+        );
+
+        /*
+         * Authentication errors
+         * go back to login.
+         */
+
+        if (
+            error.message &&
+            (
+                error.message.includes(
+                    "authentication"
+                ) ||
+                error.message.includes(
+                    "Authentication"
+                )
+            )
+        ) {
+
+            setTimeout(
+                () => {
+                    window.location.href =
+                        "/loginform.html";
+                },
+                1200
+            );
+
+            return;
+        }
+    }
+}
+
+
+/* ============================================================
+   LOGOUT BUTTON
+============================================================ */
+
+document
+    .getElementById(
+        "logoutBtn"
+    )
+    .addEventListener(
+        "click",
+        logoutStudent
+    );
+
+
+/* ============================================================
+   START DASHBOARD
+============================================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+        loadDashboard();
+    }
+);
+</script>
+
+</body>
+</html>

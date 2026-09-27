@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Nova College | Admission Form</title>
+
+<style>
+    :root {
+        --blue: #0758a8;
+        --dark-blue: #063b78;
+        --deep-blue: #052e63;
+        --soft-blue: #eef6fd;
+        --border: #d1deea;
+        --text: #173e66;
+        --muted: #6f8192;
+        --white: #ffffff;
+        --danger: #c62828;
+        --success: #197a43;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    html,
+    body {
+        width: 100%;
+        min-height: 100%;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(
+            135deg,
+            #edf6fd 0%,
+            #f7fbff 50%,
+            #e8f2fb 100%
+        );
+        color: var(--text);
+        min-height: 100vh;
+    }
+
+    button,
+    input,
+    select {
+        font-family: inherit;
+    }
+
+    /* ================================
+       HEADER
+    ================================= */
+
+    .top-header {
+        background: linear-gradient(
+            120deg,
+            #06498d,
+            #0963b9,
+            #064686
+        );
+        color: white;
+        min-height: 72px;
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.16);
+    }
+
+    .header-inner {
+        width: 94%;
+        max-width: 1200px;
+        min-height: 72px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+    }
+
+    .brand-logo {
+        width: 46px;
+        height: 46px;
+        object-fit: cover;
+        background: white;
+        padding: 4px;
+        border-radius: 7px;
+    }
+
+    .brand h1 {
+        font-size: 22px;
+        margin-bottom: 3px;
+    }
+
+    .brand p {
+        font-size: 9px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        opacity: 0.9;
+    }
+
+    .home-link {
+        color: white;
+        text-decoration: none;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 9px 14px;
+        border-radius: 5px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .home-link:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* ================================
+       NAVBAR
+    ================================= */
+
+    .navbar {
+        background: var(--dark-blue);
+    }
+
+    .nav-inner {
+        width: 94%;
+        max-width: 1200px;
+        min-height: 40px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        overflow-x: auto;
+    }
+
+    .nav-inner a {
+        color: white;
+        text-decoration: none;
+        padding: 12px 16px;
+        font-size: 11px;
+        white-space: nowrap;
+        border-bottom: 3px solid transparent;
+    }
+
+    .nav-inner a:hover,
+    .nav-inner a.active {
+        background: rgba(255, 255, 255, 0.08);
+        border-bottom-color: white;
+    }
+
+    /* ================================
+       TIME BAR
+    ================================= */
+
+    .timebar {
+        background: var(--deep-blue);
+        color: #dbeafa;
+        font-size: 11px;
+        padding: 10px 0;
+    }
+
+    .timebar-inner {
+        width: 94%;
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    /* ================================
+       PAGE
+    ================================= */
+
+    .page {
+        width: 94%;
+        max-width: 1200px;
+        margin: auto;
+        padding: 42px 0 48px;
+    }
+
+    .admission-layout {
+        width: 100%;
+        display: grid;
+        grid-template-columns:
+            minmax(300px, 0.9fr)
+            minmax(420px, 1.1fr);
+        background: white;
+        border: 1px solid var(--border);
+        box-shadow: 0 15px 45px rgba(7, 55, 105, 0.13);
+        overflow: hidden;
+    }
+
+    /* ================================
+       WELCOME PANEL
+    ================================= */
+
+    .welcome-panel {
+        background: linear-gradient(
+            145deg,
+            #0758a8,
+            #06407d
+        );
+        color: white;
+        padding: 48px 42px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .welcome-panel::before {
+        content: "";
+        position: absolute;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.06);
+        top: -120px;
+        right: -110px;
+    }
+
+    .welcome-panel::after {
+        content: "";
+        position: absolute;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        bottom: -100px;
+        left: -100px;
+    }
+
+    .welcome-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .welcome-badge {
+        display: inline-block;
+        padding: 7px 11px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 18px;
+    }
+
+    .welcome-panel h2 {
+        font-size: 34px;
+        line-height: 1.15;
+        margin-bottom: 14px;
+    }
+
+    .welcome-panel h2 span {
+        color: #b9dcf8;
+    }
+
+    .welcome-panel p {
+        font-size: 13px;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.86);
+        max-width: 430px;
+        margin-bottom: 27px;
+    }
+
+    .benefit-list {
+        list-style: none;
+    }
+
+    .benefit-list li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 12px;
+        margin-bottom: 13px;
+    }
+
+    .benefit-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    .fee-box {
+        margin-top: 17px;
+        padding: 14px;
+        background: rgba(255, 255, 255, 0.09);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 6px;
+    }
+
+    .fee-box small {
+        display: block;
+        font-size: 9px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        opacity: 0.8;
+        margin-bottom: 5px;
+    }
+
+    .fee-box strong {
+        font-size: 23px;
+    }
+
+    /* ================================
+       FORM PANEL
+    ================================= */
+
+    .form-panel {
+        padding: 42px 45px;
+    }
+
+    .form-heading {
+        margin-bottom: 22px;
+    }
+
+    .form-heading h2 {
+        color: var(--dark-blue);
+        font-size: 28px;
+        margin-bottom: 7px;
+    }
+
+    .form-heading p {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+    #message {
+        display: none;
+        padding: 12px 13px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    #message.error {
+        display: block;
+        background: #fff0f0;
+        border: 1px solid #edb5b5;
+        color: var(--danger);
+    }
+
+    #message.success {
+        display: block;
+        background: #eaf8ef;
+        border: 1px solid #b0dfc0;
+        color: var(--success);
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group.full {
+        grid-column: 1 / -1;
+    }
+
+    .form-group label {
+        color: #365a79;
+        font-size: 11px;
+        font-weight: 700;
+        margin-bottom: 7px;
+    }
+
+    .input-wrapper {
+        position: relative;
+    }
+
+    .input-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #7890a7;
+        font-size: 13px;
+        pointer-events: none;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 12px 12px 12px 37px;
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        background: white;
+        color: var(--text);
+        font-size: 12px;
+        outline: none;
+        transition: 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+        border-color: var(--blue);
+        box-shadow: 0 0 0 3px rgba(7, 88, 168, 0.08);
+    }
+
+    .password-input {
+        padding-right: 50px !important;
+    }
+
+    .password-toggle {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 0;
+        background: none;
+        color: var(--blue);
+        cursor: pointer;
+        font-size: 10px;
+        font-weight: 700;
+    }
+
+    .help-text {
+        margin-top: 4px;
+        font-size: 9px;
+        color: #8595a4;
+    }
+
+    /* ================================
+       PAYMENT
+    ================================= */
+
+    .payment-section {
+        margin-top: 19px;
+        padding-top: 18px;
+        border-top: 1px solid var(--border);
+    }
+
+    .payment-title {
+        color: #365a79;
+        font-size: 11px;
+        font-weight: 700;
+        margin-bottom: 9px;
+    }
+
+    .payment-options {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .payment-option {
+        position: relative;
+    }
+
+    .payment-option input {
+        position: absolute;
+        opacity: 0;
+    }
+
+    .payment-option label {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 11px;
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 11px;
+        color: #405f7b;
+        font-weight: 700;
+    }
+
+    .payment-option input:checked + label {
+        border-color: var(--blue);
+        background: var(--soft-blue);
+        color: var(--blue);
+    }
+
+    .payment-radio {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        border: 2px solid #a7b6c5;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .payment-option input:checked + label .payment-radio {
+        border-color: var(--blue);
+    }
+
+    .payment-option input:checked + label .payment-radio::after {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--blue);
+    }
+
+    .payment-name {
+        flex: 1;
+    }
+
+    .payment-amount {
+        font-size: 10px;
+        color: #75889a;
+    }
+
+    /* ================================
+       TERMS
+    ================================= */
+
+    .terms {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        margin-top: 16px;
+        color: #718395;
+        font-size: 10px;
+        line-height: 1.5;
+    }
+
+    .terms input {
+        margin-top: 2px;
+        accent-color: var(--blue);
+    }
+
+    /* ================================
+       SUBMIT
+    ================================= */
+
+    .submit-btn {
+        width: 100%;
+        margin-top: 18px;
+        border: 0;
+        background: linear-gradient(
+            135deg,
+            #0758a8,
+            #0870cf
+        );
+        color: white;
+        padding: 13px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 700;
+        box-shadow: 0 7px 17px rgba(7, 88, 168, 0.22);
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-1px);
+    }
+
+    .submit-btn:disabled {
+        opacity: 0.7;
+        cursor: wait;
+        transform: none;
+    }
+
+    .login-link {
+        text-align: center;
+        margin-top: 19px;
+        padding-top: 18px;
+        border-top: 1px solid var(--border);
+        color: #718395;
+        font-size: 11px;
+    }
+
+    .login-link a {
+        color: var(--blue);
+        text-decoration: none;
+        font-weight: 700;
+    }
+
+    .login-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* ================================
+       FOOTER
+    ================================= */
+
+    footer {
+        background: var(--dark-blue);
+        color: white;
+        padding: 15px;
+        font-size: 10px;
+    }
+
+    .footer-inner {
+        width: 94%;
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    .footer-links {
+        display: flex;
+        gap: 17px;
+    }
+
+    .footer-links a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .footer-links a:hover {
+        text-decoration: underline;
+    }
+
+    /* ================================
+       RESPONSIVE
+    ================================= */
+
+    @media (max-width: 850px) {
+
+        .admission-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .welcome-panel {
+            padding: 35px 30px;
+        }
+
+        .form-panel {
+            padding: 35px 28px;
+        }
+    }
+
+    @media (max-width: 600px) {
+
+        .brand h1 {
+            font-size: 18px;
+        }
+
+        .brand p {
+            display: none;
+        }
+
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group.full {
+            grid-column: auto;
+        }
+
+        .payment-options {
+            grid-template-columns: 1fr;
+        }
+
+        .footer-inner {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .footer-links {
+            justify-content: center;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- ================================
+     HEADER
+================================= -->
+
+<header class="top-header">
+
+    <div class="header-inner">
+
+        <div class="brand">
+
+            <img
+                src="nova.jpeg"
+                alt="Nova College"
+                class="brand-logo"
+                onerror="this.style.display='none'"
+            >
+
+            <div>
+                <h1>Nova College</h1>
+                <p>Admission Portal</p>
+            </div>
+
+        </div>
+
+        <a
+            href="index.html"
+            class="home-link"
+        >
+            ← College Website
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- ================================
+     NAVIGATION
+================================= -->
+
+<nav class="navbar">
+
+    <div class="nav-inner">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a
+            href="admission.html"
+            class="active"
+        >
+            Admission
+        </a>
+
+        <a href="index.html#programs">
+            Programs
+        </a>
+
+        <a href="index.html#faculty">
+            Faculty
+        </a>
+
+        <a href="index.html#notices">
+            Notices
+        </a>
+
+        <a href="index.html#contact">
+            Contact
+        </a>
+
+        <a href="loginform.html">
+            Student Login
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================================
+     TIME BAR
+================================= -->
+
+<div class="timebar">
+
+    <div class="timebar-inner">
+
+        Nova College Admission Portal |
+        <span id="currentDateTime"></span>
+
+    </div>
+
+</div>
+
+
+<!-- ================================
+     MAIN
+================================= -->
+
+<main class="page">
+
+    <section class="admission-layout">
+
+
+        <!-- WELCOME PANEL -->
+
+        <div class="welcome-panel">
+
+            <div class="welcome-content">
+
+                <div class="welcome-badge">
+                    Admissions Open
+                </div>
+
+                <h2>
+                    Start your journey
+                    at <span>Nova College.</span>
+                </h2>
+
+                <p>
+                    Complete the admission form to begin
+                    your journey toward academic excellence
+                    and a successful future.
+                </p>
+
+                <ul class="benefit-list">
+
+                    <li>
+                        <span class="benefit-icon">✓</span>
+                        Quality Education
+                    </li>
+
+                    <li>
+                        <span class="benefit-icon">✓</span>
+                        Experienced Faculty
+                    </li>
+
+                    <li>
+                        <span class="benefit-icon">✓</span>
+                        Student Support
+                    </li>
+
+                    <li>
+                        <span class="benefit-icon">✓</span>
+                        Modern Academic Environment
+                    </li>
+
+                </ul>
+
+                <div class="fee-box">
+
+                    <small>
+                        Admission Fee
+                    </small>
+
+                    <strong>
+                        Rs. 5,000
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FORM PANEL -->
+
+        <div class="form-panel">
+
+            <div class="form-heading">
+
+                <h2>
+                    Admission Form
+                </h2>
+
+                <p>
+                    Please provide your correct information
+                    below to submit your application.
+                </p>
+
+            </div>
+
+
+            <div
+                id="message"
+                role="status"
+                aria-live="polite"
+            ></div>
+
+
+            <form
+                id="admissionForm"
+                novalidate
+            >
+
+                <div class="form-grid">
+
+
+                    <!-- NAME -->
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Full Name
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                👤
+                            </span>
+
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Enter your full name"
+                                autocomplete="name"
+                                maxlength="100"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                ✉
+                            </span>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Enter your email"
+                                autocomplete="email"
+                                maxlength="150"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Phone Number
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                ☎
+                            </span>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="03XXXXXXXXX"
+                                autocomplete="tel"
+                                maxlength="20"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Create Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                🔒
+                            </span>
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="password-input"
+                                placeholder="Create password"
+                                minlength="6"
+                                maxlength="100"
+                                autocomplete="new-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                id="togglePassword"
+                                class="password-toggle"
+                                aria-label="Show password"
+                            >
+                                Show
+                            </button>
+
+                        </div>
+
+                        <div class="help-text">
+                            Password must contain at least 6 characters.
+                        </div>
+
+                    </div>
+
+
+                    <!-- COURSE -->
+
+                    <div class="form-group full">
+
+                        <label for="course">
+                            Select Course
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                🎓
+                            </span>
+
+                            <select
+                                id="course"
+                                name="course"
+                                required
+                            >
+
+                                <option value="">
+                                    Select your course
+                                </option>
+
+                                <option value="Computer Science">
+                                    Computer Science
+                                </option>
+
+                                <option value="Pre-Medical">
+                                    Pre-Medical
+                                </option>
+
+                                <option value="Pre-Engineering">
+                                    Pre-Engineering
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PAYMENT -->
+
+                <div class="payment-section">
+
+                    <div class="payment-title">
+                        Admission Fee & Payment Method
+                    </div>
+
+                    <div class="payment-options">
+
+                        <div class="payment-option">
+
+                            <input
+                                type="radio"
+                                name="paymentMethod"
+                                id="bank"
+                                value="bank"
+                                checked
+                                required
+                            >
+
+                            <label for="bank">
+
+                                <span class="payment-radio"></span>
+
+                                <span class="payment-name">
+                                    Bank Transfer
+                                </span>
+
+                                <span class="payment-amount">
+                                    Rs. 5,000
+                                </span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TERMS -->
+
+                <label class="terms">
+
+                    <input
+                        type="checkbox"
+                        id="agreeTerms"
+                        required
+                    >
+
+                    <span>
+                        I confirm that the information provided
+                        in this admission form is correct and I
+                        agree to the college admission terms.
+                    </span>
+
+                </label>
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    id="submitButton"
+                    class="submit-btn"
+                >
+                    Submit Application & Pay
+                </button>
+
+
+                <!-- LOGIN -->
+
+                <div class="login-link">
+
+                    Already registered?
+
+                    <a href="loginform.html">
+                        Student Login
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- ================================
+     FOOTER
+================================= -->
+
+<footer>
+
+    <div class="footer-inner">
+
+        <div>
+            © 2026 Nova College. All rights reserved.
+        </div>
+
+        <div class="footer-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="loginform.html">
+                Login
+            </a>
+
+            <a href="index.html#contact">
+                Contact
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- ================================
+     JAVASCRIPT
+================================= -->
+
+<script>
+
+    // Use the same server that is serving this page.
+    // Works on localhost and LAN/mobile.
+
+    const API_BASE = window.location.origin;
+
+
+    // ================================
+    // CLOCK
+    // ================================
+
+    function updateAdmissionClock() {
+
+        const element =
+            document.getElementById("currentDateTime");
+
+        if (!element) {
+            return;
+        }
+
+        const now = new Date();
+
+        element.textContent =
+            now.toLocaleString("en-PK", {
+                weekday: "short",
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit"
+            });
+    }
+
+    updateAdmissionClock();
+
+    setInterval(
+        updateAdmissionClock,
+        1000
+    );
+
+
+    // ================================
+    // PASSWORD TOGGLE
+    // ================================
+
+    const togglePassword =
+        document.getElementById("togglePassword");
+
+    const passwordInput =
+        document.getElementById("password");
+
+    if (
+        togglePassword &&
+        passwordInput
+    ) {
+
+        togglePassword.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    passwordInput.type === "password"
+                ) {
+
+                    passwordInput.type = "text";
+
+                    togglePassword.textContent =
+                        "Hide";
+
+                    togglePassword.setAttribute(
+                        "aria-label",
+                        "Hide password"
+                    );
+
+                } else {
+
+                    passwordInput.type =
+                        "password";
+
+                    togglePassword.textContent =
+                        "Show";
+
+                    togglePassword.setAttribute(
+                        "aria-label",
+                        "Show password"
+                    );
+                }
+
+            }
+        );
+    }
+
+
+    // ================================
+    // MESSAGE
+    // ================================
+
+    function showMessage(
+        message,
+        type
+    ) {
+
+        const messageBox =
+            document.getElementById("message");
+
+        messageBox.textContent =
+            message;
+
+        messageBox.className =
+            type;
+    }
+
+
+    // ================================
+    // ADMISSION FORM
+    // ================================
+
+    const admissionForm =
+        document.getElementById(
+            "admissionForm"
+        );
+
+
+    admissionForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+
+            const submitButton =
+                document.getElementById(
+                    "submitButton"
+                );
+
+
+            // ================================
+            // GET FORM VALUES
+            // ================================
+
+            const name =
+                document
+                    .getElementById("name")
+                    .value
+                    .trim();
+
+            const email =
+                document
+                    .getElementById("email")
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+            const phone =
+                document
+                    .getElementById("phone")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("password")
+                    .value;
+
+            const course =
+                document
+                    .getElementById("course")
+                    .value;
+
+            const paymentMethod =
+                document.querySelector(
+                    'input[name="paymentMethod"]:checked'
+                );
+
+            const agreeTerms =
+                document
+                    .getElementById("agreeTerms")
+                    .checked;
+
+
+            // ================================
+            // VALIDATION
+            // ================================
+
+            if (!name) {
+
+                showMessage(
+                    "Please enter your full name.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            if (!email) {
+
+                showMessage(
+                    "Please enter your email address.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            const emailPattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+            if (!emailPattern.test(email)) {
+
+                showMessage(
+                    "A valid email address is required.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            if (!phone) {
+
+                showMessage(
+                    "Please enter your phone number.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            if (password.length < 6) {
+
+                showMessage(
+                    "Password must contain at least 6 characters.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            if (!course) {
+
+                showMessage(
+                    "Please select your course.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            if (!paymentMethod) {
+
+                showMessage(
+                    "Please select Bank Transfer.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            if (
+                paymentMethod.value !== "bank"
+            ) {
+
+                showMessage(
+                    "Please select Bank Transfer.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            if (!agreeTerms) {
+
+                showMessage(
+                    "Please agree to the admission terms.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            // ================================
+            // DISABLE BUTTON
+            // ================================
+
+            submitButton.disabled = true;
+
+            submitButton.textContent =
+                "Submitting Application...";
+
+
+            showMessage(
+                "Submitting your admission application...",
+                "success"
+            );
+
+
+            try {
+
+                // ================================
+                // REGISTER STUDENT
+                // ================================
+
+                const registerResponse =
+                    await fetch(
+                        `${API_BASE}/api/register`,
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json",
+
+                                "Accept":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify({
+                                    name: name,
+                                    email: email,
+                                    password: password,
+                                    phone: phone,
+                                    course: course,
+                                    paymentMethod: "bank",
+                                    amount: 5000
+                                })
+                        }
+                    );
+
+
+                // ================================
+                // READ SERVER RESPONSE
+                // ================================
+
+                const registerText =
+                    await registerResponse.text();
+
+                let registerData;
+
+                try {
+
+                    registerData =
+                        JSON.parse(
+                            registerText
+                        );
+
+                } catch (parseError) {
+
+                    console.error(
+                        "Invalid server response:",
+                        registerText
+                    );
+
+                    throw new Error(
+                        "Server returned an invalid response."
+                    );
+                }
+
+
+                // ================================
+                // CHECK REGISTRATION
+                // ================================
+
+                if (
+                    !registerResponse.ok ||
+                    !registerData.success
+                ) {
+
+                    throw new Error(
+                        registerData.message ||
+                        "Admission registration failed."
+                    );
+                }
+
+
+                // ================================
+                // STUDENT DATA
+                // ================================
+
+                const student =
+                    registerData.student;
+
+
+                if (
+                    !student ||
+                    typeof student !== "object"
+                ) {
+
+                    throw new Error(
+                        "Student registration succeeded, but student information was not returned."
+                    );
+                }
+
+
+                // ================================
+                // SAVE STUDENT DATA
+                // ================================
+
+                localStorage.setItem(
+                    "novaStudent",
+                    JSON.stringify(student)
+                );
+
+                localStorage.setItem(
+                    "student",
+                    JSON.stringify(student)
+                );
+
+                localStorage.setItem(
+                    "novaStudentEmail",
+                    student.email || email
+                );
+
+
+                if (student.studentId) {
+
+                    localStorage.setItem(
+                        "novaStudentId",
+                        student.studentId
+                    );
+                }
+
+
+                // ================================
+                // SAVE PAYMENT INFORMATION
+                // ================================
+
+                const payment =
+                    registerData.payment || {};
+
+                const transactionId =
+                    payment.transactionId ||
+                    "Pending";
+
+
+                // ================================
+                // SUCCESS
+                // ================================
+
+                showMessage(
+                    "Admission successful! Student ID: " +
+                    (student.studentId || "Assigned") +
+                    " | Transaction ID: " +
+                    transactionId +
+                    ". Redirecting to Student Login...",
+                    "success"
+                );
+
+
+                submitButton.textContent =
+                    "Application Submitted ✓";
+
+
+                // ================================
+                // REDIRECT
+                // ================================
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "loginform.html";
+
+                    },
+                    1800
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "Admission error:",
+                    error
+                );
+
+
+                showMessage(
+                    error.message ||
+                    "Could not connect to the server.",
+                    "error"
+                );
+
+
+                submitButton.disabled =
+                    false;
+
+                submitButton.textContent =
+                    "Submit Application & Pay";
+            }
+
+        }
+    );
+
+</script>
+```
+
+</body>
+</html>

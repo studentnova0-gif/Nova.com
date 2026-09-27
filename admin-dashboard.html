@@ -1,0 +1,2830 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin Dashboard - Nova College</title>
+
+```
+<link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+    :root {
+        --navy-950: #081428;
+        --navy-900: #0c1c3a;
+        --navy-800: #123361;
+        --navy-700: #1a468c;
+        --gold-600: #b8860f;
+        --gold-500: #d4a017;
+        --gold-400: #e7b840;
+        --bg: #eef1f8;
+        --card: #ffffff;
+        --text: #0e1830;
+        --muted: #66708a;
+        --border: #e2e6f0;
+        --success: #157a3d;
+        --success-bg: #dcf5e3;
+        --warning: #a05a06;
+        --warning-bg: #fbedcf;
+        --danger: #b91c1c;
+        --danger-bg: #fde3e3;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: "Manrope", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        display: flex;
+        min-height: 100vh;
+    }
+
+    /* ============================================================
+       SIDEBAR
+    ============================================================ */
+
+    .sidebar {
+        width: 270px;
+        flex-shrink: 0;
+        background: linear-gradient(
+            180deg,
+            var(--navy-950) 0%,
+            var(--navy-900) 65%,
+            var(--navy-800) 100%
+        );
+        color: #fff;
+        padding: 30px 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+    }
+
+    .brand {
+        text-align: center;
+    }
+
+    .brand-mark {
+        width: 84px;
+        height: 84px;
+        margin: 0 auto 16px;
+        background: #fff;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .brand-mark img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 6px;
+    }
+
+    .brand h2 {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--gold-400);
+    }
+
+    .brand p {
+        font-size: 0.75rem;
+        color: #9fb0d1;
+        margin-top: 2px;
+    }
+
+    .brand-rule {
+        width: 42px;
+        height: 3px;
+        background: var(--gold-500);
+        border-radius: 3px;
+        margin: 16px auto 0;
+    }
+
+    .admin-info {
+        margin-top: 26px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 14px 16px;
+    }
+
+    .admin-info .label {
+        font-size: 0.72rem;
+        color: #9fb0d1;
+        margin-bottom: 4px;
+    }
+
+    .admin-info strong {
+        font-size: 0.9rem;
+        color: #fff;
+        word-break: break-all;
+        font-weight: 600;
+    }
+
+    /* ============================================================
+       SIDEBAR BUTTONS
+    ============================================================ */
+
+    .sidebar-actions {
+        width: 100%;
+    }
+
+    .admin-login-btn {
+        display: block;
+        width: 100%;
+        background-color: var(--navy-700);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 12px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 0.88rem;
+        font-family: inherit;
+        text-align: center;
+        text-decoration: none;
+        margin-bottom: 10px;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .admin-login-btn:hover {
+        background-color: var(--navy-800);
+        transform: translateY(-1px);
+    }
+
+    .logout-btn {
+        background-color: var(--danger);
+        color: #fff;
+        border: none;
+        padding: 12px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+        font-weight: 700;
+        font-size: 0.88rem;
+        font-family: inherit;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .logout-btn:hover {
+        background-color: #991b1b;
+        transform: translateY(-1px);
+    }
+
+    /* ============================================================
+       MAIN CONTENT
+    ============================================================ */
+
+    .main-content {
+        flex: 1;
+        padding: 34px 38px;
+        overflow-y: auto;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 26px;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 18px;
+    }
+
+    .header h1 {
+        color: var(--navy-900);
+        font-size: 1.7rem;
+        font-weight: 800;
+    }
+
+    .header p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-top: 4px;
+    }
+
+    /* ============================================================
+       STATS
+    ============================================================ */
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 18px;
+        margin-bottom: 28px;
+    }
+
+    .stat-card {
+        background: var(--card);
+        padding: 18px 20px 20px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        border-top: 4px solid var(--navy-700);
+        box-shadow: 0 4px 14px rgba(15, 32, 67, 0.06);
+    }
+
+    .stat-card.gold {
+        border-top-color: var(--gold-500);
+    }
+
+    .stat-card h3 {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--muted);
+        margin-bottom: 10px;
+    }
+
+    .stat-card .value {
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: var(--navy-900);
+    }
+
+    /* ============================================================
+       DASHBOARD
+    ============================================================ */
+
+    .dashboard-layout {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 22px;
+    }
+
+    .card {
+        background: var(--card);
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        padding: 22px;
+        margin-bottom: 22px;
+        box-shadow: 0 4px 14px rgba(15, 32, 67, 0.05);
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+
+    .card h2 {
+        font-size: 1.08rem;
+        font-weight: 700;
+        color: var(--navy-900);
+    }
+
+    /* ============================================================
+       FORMS
+    ============================================================ */
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        font-size: 0.83rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.9rem;
+        outline: none;
+        font-family: inherit;
+        background: #fbfcfe;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+        border-color: var(--navy-700);
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .section-divider {
+        margin: 18px 0 12px;
+        border: none;
+        border-top: 1px dashed var(--border);
+    }
+
+    .section-label {
+        font-size: 0.76rem;
+        font-weight: 700;
+        color: var(--gold-600);
+        margin-bottom: 10px;
+    }
+
+    .submit-btn {
+        width: 100%;
+        background-color: var(--navy-800);
+        color: #fff;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 0.92rem;
+        cursor: pointer;
+        margin-top: 12px;
+    }
+
+    .submit-btn:hover {
+        background-color: var(--navy-700);
+    }
+
+    /* ============================================================
+       SEARCH
+    ============================================================ */
+
+    .search-bar {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        margin-bottom: 16px;
+        font-size: 0.9rem;
+        font-family: inherit;
+        outline: none;
+    }
+
+    .search-bar:focus {
+        border-color: var(--navy-700);
+    }
+
+    /* ============================================================
+       TABLE
+    ============================================================ */
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.87rem;
+    }
+
+    th,
+    td {
+        padding: 12px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    th {
+        background-color: var(--navy-950);
+        color: #cfdaf0;
+        font-weight: 600;
+        font-size: 0.78rem;
+    }
+
+    /* ============================================================
+       STATUS
+    ============================================================ */
+
+    .status {
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.74rem;
+        font-weight: 700;
+        display: inline-block;
+    }
+
+    .status-active,
+    .status-approved {
+        background: var(--success-bg);
+        color: var(--success);
+    }
+
+    .status-pending {
+        background: var(--warning-bg);
+        color: var(--warning);
+    }
+
+    .status-inactive,
+    .status-rejected {
+        background: var(--danger-bg);
+        color: var(--danger);
+    }
+
+    .action-link {
+        color: var(--navy-700);
+        font-weight: 700;
+        cursor: pointer;
+        border-bottom: 1.5px solid var(--gold-400);
+    }
+
+    /* ============================================================
+       MESSAGES
+    ============================================================ */
+
+    #loading {
+        display: none;
+        text-align: center;
+        padding: 22px;
+        font-weight: 700;
+        color: var(--navy-800);
+    }
+
+    .msg-box {
+        padding: 11px 14px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        display: none;
+        margin-top: 12px;
+        font-weight: 600;
+    }
+
+    .msg-box.success {
+        background: var(--success-bg);
+        color: var(--success);
+        display: block;
+    }
+
+    .msg-box.error {
+        background: var(--danger-bg);
+        color: var(--danger);
+        display: block;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+
+    @media (max-width: 1024px) {
+        .dashboard-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+            position: relative;
+            height: auto;
+        }
+
+        body {
+            flex-direction: column;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .main-content {
+            padding: 20px 15px;
+        }
+
+        .sidebar {
+            width: 100%;
+            padding: 25px 18px;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+
+        .header h1 {
+            font-size: 1.4rem;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <div>
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                <img
+                    src="nova.jpeg"
+                    alt="Nova College Logo"
+                >
+            </div>
+
+            <h2>Nova College of Science</h2>
+
+            <p>Admin Portal</p>
+
+            <div class="brand-rule"></div>
+
+        </div>
+
+        <div class="admin-info">
+
+            <div class="label">
+                Signed in as
+            </div>
+
+            <strong id="adminEmail">
+                Checking...
+            </strong>
+
+        </div>
+
+    </div>
+
+    <div class="sidebar-actions">
+
+        <a
+            href="/admin-login.html"
+            class="admin-login-btn"
+        >
+            Admin Login
+        </a>
+
+        <button
+            id="logoutBtn"
+            class="logout-btn"
+            type="button"
+        >
+            Log Out
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MAIN CONTENT -->
+
+<div class="main-content">
+
+    <div class="header">
+
+        <div>
+
+            <h1>
+                Admin Dashboard
+            </h1>
+
+            <p>
+                Manage students, admissions and fee payments
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="errorBox"
+        class="msg-box error"
+        style="display:none;"
+    ></div>
+
+
+    <div id="loading">
+        Loading Dashboard Data...
+    </div>
+
+
+    <div id="dashboardContent">
+
+        <!-- STATISTICS -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <h3>
+                    Total Students
+                </h3>
+
+                <div
+                    class="value"
+                    id="totalStudents"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card gold">
+
+                <h3>
+                    Pending Admissions
+                </h3>
+
+                <div
+                    class="value"
+                    id="totalApplications"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>
+                    Total Payments
+                </h3>
+
+                <div
+                    class="value"
+                    id="totalPayments"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card gold">
+
+                <h3>
+                    Approved Revenue
+                </h3>
+
+                <div
+                    class="value"
+                    id="approvedAmount"
+                >
+                    Rs. 0
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- DASHBOARD LAYOUT -->
+
+        <div class="dashboard-layout">
+
+            <div>
+
+                <!-- STUDENT RECORDS -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h2>
+                            Student Records
+                        </h2>
+
+                    </div>
+
+                    <input
+                        type="text"
+                        id="studentSearch"
+                        class="search-bar"
+                        placeholder="Search by ID, name, email, or phone..."
+                        autocomplete="off"
+                    >
+
+                    <div style="overflow-x:auto;">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Course</th>
+                                    <th>Admission</th>
+                                    <th>Account</th>
+                                    <th>Action</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="studentsTableBody">
+
+                                <tr>
+
+                                    <td
+                                        colspan="6"
+                                        style="text-align:center;"
+                                    >
+                                        Loading records...
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RECENT PAYMENTS -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h2>
+                            Recent Payments
+                        </h2>
+
+                    </div>
+
+                    <div style="overflow-x:auto;">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>Student ID</th>
+                                    <th>Amount</th>
+                                    <th>Method</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="paymentsBody">
+
+                                <tr>
+
+                                    <td
+                                        colspan="5"
+                                        style="text-align:center;"
+                                    >
+                                        Loading payment history...
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- STUDENT MANAGEMENT -->
+
+            <div>
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h2>
+                            Student Management Form
+                        </h2>
+
+                    </div>
+
+
+                    <form id="unifiedAdminForm">
+
+                        <div class="form-group">
+
+                            <label for="actionStudentId">
+                                Student ID *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="actionStudentId"
+                                placeholder="e.g. NOVA-2026-123456"
+                                required
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="actionFullName">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="actionFullName"
+                                placeholder="Student Full Name"
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label for="actionAdmissionStatus">
+                                    Admission Status
+                                </label>
+
+                                <select id="actionAdmissionStatus">
+
+                                    <option value="Pending">
+                                        Pending
+                                    </option>
+
+                                    <option value="Approved">
+                                        Approved
+                                    </option>
+
+                                    <option value="Rejected">
+                                        Rejected
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="actionAccountStatus">
+                                    Account Status
+                                </label>
+
+                                <select id="actionAccountStatus">
+
+                                    <option value="Active">
+                                        Active
+                                    </option>
+
+                                    <option value="Inactive">
+                                        Inactive
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+                        <hr class="section-divider">
+
+                        <p class="section-label">
+                            Student Information
+                        </p>
+
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label for="actionClass">
+                                    Class
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="actionClass"
+                                    autocomplete="off"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="actionSection">
+                                    Section
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="actionSection"
+                                    autocomplete="off"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label for="actionRollNumber">
+                                    Roll Number
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="actionRollNumber"
+                                    autocomplete="off"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="actionMarks">
+                                    Marks
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="actionMarks"
+                                    placeholder="1200"
+                                    autocomplete="off"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="actionAttendance">
+                                Attendance
+                            </label>
+
+                            <input
+                                type="text"
+                                id="actionAttendance"
+                                placeholder="92%"
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+
+                        <hr class="section-divider">
+
+                        <p class="section-label">
+                            Optional: Record Fee Payment
+                        </p>
+
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label for="actionFeeAmount">
+                                    Fee Amount (Rs.)
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="actionFeeAmount"
+                                    placeholder="0"
+                                    min="1"
+                                    step="1"
+                                    autocomplete="off"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="actionFeeTransactionId">
+                                    Transaction ID
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="actionFeeTransactionId"
+                                    placeholder="TXN-12345"
+                                    autocomplete="off"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <hr class="section-divider">
+
+                        <p class="section-label">
+                            Optional: Reset Password
+                        </p>
+
+
+                        <div class="form-group">
+
+                            <label for="actionNewPassword">
+                                New Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="actionNewPassword"
+                                placeholder="Leave blank to keep unchanged"
+                                autocomplete="new-password"
+                            >
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="submit-btn"
+                            id="saveStudentBtn"
+                        >
+                            Save Student Changes
+                        </button>
+
+
+                        <div
+                            id="formMessage"
+                            class="msg-box"
+                        ></div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+```
+<script>
+"use strict";
+
+/* ============================================================
+   GLOBAL DATA
+============================================================ */
+
+let allStudents = [];
+let latestPayments = [];
+let allInformation = [];
+
+
+/* ============================================================
+   GET ADMIN TOKEN
+============================================================ */
+
+function getAdminToken() {
+
+    const keys = [
+        "adminToken",
+        "admin_token",
+        "ADMIN_TOKEN",
+        "authToken",
+        "token"
+    ];
+
+    for (const key of keys) {
+
+        const value =
+            localStorage.getItem(key) ||
+            sessionStorage.getItem(key);
+
+        if (value) {
+            return value;
+        }
+    }
+
+    return "";
+}
+
+
+/* ============================================================
+   CLEAR ADMIN STORAGE
+============================================================ */
+
+function clearAdminStorage() {
+
+    const keys = [
+        "adminToken",
+        "admin_token",
+        "ADMIN_TOKEN",
+        "authToken",
+        "token",
+        "novaAdminEmail"
+    ];
+
+    keys.forEach(function(key) {
+
+        localStorage.removeItem(key);
+        sessionStorage.removeItem(key);
+
+    });
+}
+
+
+/* ============================================================
+   API REQUEST
+============================================================ */
+
+async function apiRequest(
+    url,
+    options = {}
+) {
+
+    const token =
+        getAdminToken();
+
+
+    const headers = {
+
+        "Accept":
+            "application/json",
+
+        ...(options.body
+            ? {
+                "Content-Type":
+                    "application/json"
+            }
+            : {}),
+
+        ...(options.headers || {})
+
+    };
+
+
+    if (token) {
+
+        headers["Authorization"] =
+            "Bearer " + token;
+
+        headers["X-Admin-Token"] =
+            token;
+    }
+
+
+    let response;
+
+    try {
+
+        response =
+            await fetch(
+                url,
+                {
+                    ...options,
+
+                    credentials:
+                        "include",
+
+                    headers
+                }
+            );
+
+    } catch (error) {
+
+        throw new Error(
+            "Connection error. Make sure the Nova College server is running."
+        );
+    }
+
+
+    let data = {};
+
+
+    const contentType =
+        response.headers.get(
+            "content-type"
+        ) || "";
+
+
+    if (
+        contentType.includes(
+            "application/json"
+        )
+    ) {
+
+        try {
+
+            data =
+                await response.json();
+
+        } catch {
+
+            data = {};
+        }
+
+    } else {
+
+        const text =
+            await response.text();
+
+        data = {
+
+            success: false,
+
+            message:
+                text ||
+                "Server returned an invalid response."
+
+        };
+    }
+
+
+    if (
+        response.status === 401 ||
+        response.status === 403
+    ) {
+
+        clearAdminStorage();
+
+        window.location.href =
+            "/admin-login.html";
+
+        return null;
+    }
+
+
+    if (
+        !response.ok ||
+        data?.success === false
+    ) {
+
+        throw new Error(
+
+            data?.message ||
+            data?.error ||
+            `Request failed (${response.status})`
+
+        );
+    }
+
+
+    return data;
+}
+
+
+/* ============================================================
+   CHECK ADMIN SESSION
+   IMPORTANT:
+   Uses /api/admin/auth-check
+============================================================ */
+
+async function checkAdminSession() {
+
+    try {
+
+        const data =
+            await apiRequest(
+                "/api/admin/auth-check"
+            );
+
+
+        if (!data) {
+            return false;
+        }
+
+
+        const admin =
+            data.admin ||
+            data.user ||
+            {};
+
+
+        const email =
+            admin.email ||
+            data.email ||
+            localStorage.getItem(
+                "novaAdminEmail"
+            ) ||
+            "Admin";
+
+
+        const emailElement =
+            document.getElementById(
+                "adminEmail"
+            );
+
+
+        if (emailElement) {
+
+            emailElement.textContent =
+                email;
+        }
+
+
+        return true;
+
+
+    } catch (error) {
+
+        console.error(
+            "Admin authentication error:",
+            error
+        );
+
+
+        clearAdminStorage();
+
+
+        window.location.href =
+            "/admin-login.html";
+
+
+        return false;
+    }
+}
+
+
+/* ============================================================
+   LOAD DASHBOARD
+============================================================ */
+
+async function loadDashboardData() {
+
+    const loading =
+        document.getElementById(
+            "loading"
+        );
+
+    const errorBox =
+        document.getElementById(
+            "errorBox"
+        );
+
+
+    try {
+
+        if (loading) {
+
+            loading.style.display =
+                "block";
+        }
+
+
+        if (errorBox) {
+
+            errorBox.style.display =
+                "none";
+
+            errorBox.textContent =
+                "";
+        }
+
+
+        /*
+         * Students and payments are required.
+         *
+         * Student-information is allowed
+         * to fail because old databases may
+         * not have information records yet.
+         */
+
+        await Promise.all([
+            fetchStudents(),
+            fetchPayments(),
+            fetchInformation()
+        ]);
+
+
+        updateStats();
+
+
+    } catch (error) {
+
+        console.error(
+            "Dashboard loading error:",
+            error
+        );
+
+
+        if (errorBox) {
+
+            errorBox.textContent =
+                error.message ||
+                "Unable to load dashboard data.";
+
+            errorBox.style.display =
+                "block";
+        }
+
+
+    } finally {
+
+        if (loading) {
+
+            loading.style.display =
+                "none";
+        }
+    }
+}
+
+
+/* ============================================================
+   FETCH STUDENTS
+============================================================ */
+
+async function fetchStudents() {
+
+    const data =
+        await apiRequest(
+            "/api/admin/students"
+        );
+
+
+    if (
+        Array.isArray(
+            data?.students
+        )
+    ) {
+
+        allStudents =
+            data.students;
+
+    } else if (
+        Array.isArray(
+            data?.data
+        )
+    ) {
+
+        allStudents =
+            data.data;
+
+    } else if (
+        Array.isArray(data)
+    ) {
+
+        allStudents =
+            data;
+
+    } else {
+
+        allStudents = [];
+    }
+
+
+    renderStudentsTable(
+        allStudents
+    );
+}
+
+
+/* ============================================================
+   FETCH STUDENT INFORMATION
+============================================================ */
+
+async function fetchInformation() {
+
+    try {
+
+        const data =
+            await apiRequest(
+                "/api/admin/student-information"
+            );
+
+
+        if (
+            Array.isArray(
+                data?.studentInformation
+            )
+        ) {
+
+            allInformation =
+                data.studentInformation;
+
+        } else if (
+            Array.isArray(
+                data?.information
+            )
+        ) {
+
+            allInformation =
+                data.information;
+
+        } else if (
+            Array.isArray(
+                data?.data
+            )
+        ) {
+
+            allInformation =
+                data.data;
+
+        } else if (
+            Array.isArray(data)
+        ) {
+
+            allInformation =
+                data;
+
+        } else {
+
+            allInformation = [];
+        }
+
+
+    } catch (error) {
+
+        /*
+         * Do not destroy the entire dashboard
+         * if information records are unavailable.
+         */
+
+        console.warn(
+            "Student information could not be loaded:",
+            error.message
+        );
+
+        allInformation = [];
+    }
+}
+
+
+/* ============================================================
+   RENDER STUDENTS
+============================================================ */
+
+function renderStudentsTable(
+    students
+) {
+
+    const tbody =
+        document.getElementById(
+            "studentsTableBody"
+        );
+
+
+    if (!tbody) {
+        return;
+    }
+
+
+    if (
+        !students ||
+        students.length === 0
+    ) {
+
+        tbody.innerHTML = `
+            <tr>
+                <td
+                    colspan="6"
+                    style="text-align:center;"
+                >
+                    No students found.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    tbody.innerHTML =
+        students.map(
+            function(student) {
+
+                const id =
+                    student.studentId ||
+                    student.id ||
+                    student._id ||
+                    "-";
+
+
+                const name =
+                    student.fullName ||
+                    student.name ||
+                    "N/A";
+
+
+                const course =
+                    student.course ||
+                    student.program ||
+                    "-";
+
+
+                const admissionStatus =
+                    student.admissionStatus ||
+                    student.admission ||
+                    "Pending";
+
+
+                const accountStatus =
+                    student.status ||
+                    student.accountStatus ||
+                    "Active";
+
+
+                return `
+                    <tr>
+
+                        <td>
+                            <strong>
+                                ${escapeHtml(id)}
+                            </strong>
+                        </td>
+
+                        <td>
+                            ${escapeHtml(name)}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(course)}
+                        </td>
+
+                        <td>
+                            ${createStatusBadge(
+                                admissionStatus
+                            )}
+                        </td>
+
+                        <td>
+                            ${createStatusBadge(
+                                accountStatus
+                            )}
+                        </td>
+
+                        <td>
+
+                            <span
+                                class="action-link"
+                                onclick="populateActionForm('${escapeAttribute(id)}')"
+                            >
+                                Select
+                            </span>
+
+                        </td>
+
+                    </tr>
+                `;
+
+            }
+        ).join("");
+}
+
+
+/* ============================================================
+   FETCH PAYMENTS
+============================================================ */
+
+async function fetchPayments() {
+
+    const data =
+        await apiRequest(
+            "/api/admin/payments"
+        );
+
+
+    if (
+        Array.isArray(
+            data?.payments
+        )
+    ) {
+
+        latestPayments =
+            data.payments;
+
+    } else if (
+        Array.isArray(
+            data?.data
+        )
+    ) {
+
+        latestPayments =
+            data.data;
+
+    } else if (
+        Array.isArray(data)
+    ) {
+
+        latestPayments =
+            data;
+
+    } else {
+
+        latestPayments = [];
+    }
+
+
+    renderPaymentsTable(
+        latestPayments
+    );
+}
+
+
+/* ============================================================
+   RENDER PAYMENTS
+============================================================ */
+
+function renderPaymentsTable(
+    payments
+) {
+
+    const tbody =
+        document.getElementById(
+            "paymentsBody"
+        );
+
+
+    if (!tbody) {
+        return;
+    }
+
+
+    if (
+        !payments ||
+        payments.length === 0
+    ) {
+
+        tbody.innerHTML = `
+            <tr>
+                <td
+                    colspan="5"
+                    style="text-align:center;"
+                >
+                    No payment records found.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    tbody.innerHTML =
+        payments.map(
+            function(payment) {
+
+                const studentId =
+                    payment.studentId ||
+                    payment.studentIdentifier ||
+                    "-";
+
+
+                const amount =
+                    Number(
+                        payment.amount || 0
+                    );
+
+
+                const method =
+                    payment.method ||
+                    payment.paymentMethod ||
+                    "Bank";
+
+
+                const status =
+                    payment.status ||
+                    "Pending";
+
+
+                const date =
+                    payment.createdAt
+                        ? new Date(
+                            payment.createdAt
+                        ).toLocaleDateString(
+                            "en-PK"
+                        )
+                        : "-";
+
+
+                return `
+                    <tr>
+
+                        <td>
+                            <strong>
+                                ${escapeHtml(
+                                    studentId
+                                )}
+                            </strong>
+                        </td>
+
+                        <td>
+                            Rs.
+                            ${amount.toLocaleString(
+                                "en-PK"
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                method
+                            )}
+                        </td>
+
+                        <td>
+                            ${createStatusBadge(
+                                status
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                date
+                            )}
+                        </td>
+
+                    </tr>
+                `;
+
+            }
+        ).join("");
+}
+
+
+/* ============================================================
+   UPDATE STATISTICS
+============================================================ */
+
+function updateStats() {
+
+    const totalStudents =
+        document.getElementById(
+            "totalStudents"
+        );
+
+
+    const totalApplications =
+        document.getElementById(
+            "totalApplications"
+        );
+
+
+    const totalPayments =
+        document.getElementById(
+            "totalPayments"
+        );
+
+
+    const approvedAmount =
+        document.getElementById(
+            "approvedAmount"
+        );
+
+
+    if (totalStudents) {
+
+        totalStudents.textContent =
+            allStudents.length;
+    }
+
+
+    const pendingAdmissions =
+        allStudents.filter(
+            function(student) {
+
+                return (
+                    String(
+                        student.admissionStatus ||
+                        student.admission ||
+                        "Pending"
+                    ).toLowerCase()
+                    ===
+                    "pending"
+                );
+
+            }
+        ).length;
+
+
+    if (totalApplications) {
+
+        totalApplications.textContent =
+            pendingAdmissions;
+    }
+
+
+    if (totalPayments) {
+
+        totalPayments.textContent =
+            latestPayments.length;
+    }
+
+
+    const approvedTotal =
+        latestPayments
+            .filter(
+                function(payment) {
+
+                    return (
+                        String(
+                            payment.status ||
+                            ""
+                        ).toLowerCase()
+                        ===
+                        "approved"
+                    );
+
+                }
+            )
+            .reduce(
+                function(sum, payment) {
+
+                    return (
+                        sum +
+                        Number(
+                            payment.amount ||
+                            0
+                        )
+                    );
+
+                },
+                0
+            );
+
+
+    if (approvedAmount) {
+
+        approvedAmount.textContent =
+            "Rs. " +
+            approvedTotal.toLocaleString(
+                "en-PK"
+            );
+    }
+}
+
+
+/* ============================================================
+   POPULATE STUDENT FORM
+============================================================ */
+
+window.populateActionForm =
+function(studentId) {
+
+    const cleanStudentId =
+        String(
+            studentId || ""
+        ).trim();
+
+
+    const student =
+        allStudents.find(
+            function(item) {
+
+                return (
+                    String(
+                        item.studentId ||
+                        item.id ||
+                        item._id ||
+                        ""
+                    ).trim()
+                    ===
+                    cleanStudentId
+                );
+
+            }
+        );
+
+
+    if (!student) {
+        return;
+    }
+
+
+    const selectedStudentId =
+        String(
+            student.studentId ||
+            student.id ||
+            student._id ||
+            ""
+        ).trim();
+
+
+    setValue(
+        "actionStudentId",
+        selectedStudentId
+    );
+
+
+    setValue(
+        "actionFullName",
+        student.fullName ||
+        student.name ||
+        ""
+    );
+
+
+    setValue(
+        "actionAdmissionStatus",
+        student.admissionStatus ||
+        student.admission ||
+        "Pending"
+    );
+
+
+    setValue(
+        "actionAccountStatus",
+        student.status ||
+        student.accountStatus ||
+        "Active"
+    );
+
+
+    const info =
+        allInformation.find(
+            function(item) {
+
+                return (
+                    String(
+                        item.studentId ||
+                        ""
+                    ).trim()
+                    ===
+                    selectedStudentId
+                );
+
+            }
+        );
+
+
+    setValue(
+        "actionClass",
+        info?.class ||
+        info?.className ||
+        student.class ||
+        ""
+    );
+
+
+    setValue(
+        "actionSection",
+        info?.section ||
+        student.section ||
+        ""
+    );
+
+
+    setValue(
+        "actionRollNumber",
+        info?.rollNumber ||
+        info?.rollNo ||
+        student.rollNumber ||
+        ""
+    );
+
+
+    setValue(
+        "actionMarks",
+        info?.marks ??
+        student.marks ??
+        ""
+    );
+
+
+    setValue(
+        "actionAttendance",
+        info?.attendance ||
+        student.attendance ||
+        ""
+    );
+
+
+    const feeInput =
+        document.getElementById(
+            "actionFeeAmount"
+        );
+
+
+    if (feeInput) {
+        feeInput.focus();
+    }
+};
+
+
+/* ============================================================
+   SAVE STUDENT CHANGES
+============================================================ */
+
+const adminForm =
+    document.getElementById(
+        "unifiedAdminForm"
+    );
+
+
+if (adminForm) {
+
+    adminForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const studentId =
+                getValue(
+                    "actionStudentId"
+                ).trim();
+
+
+            const fullName =
+                getValue(
+                    "actionFullName"
+                ).trim();
+
+
+            const admissionStatus =
+                getValue(
+                    "actionAdmissionStatus"
+                );
+
+
+            const status =
+                getValue(
+                    "actionAccountStatus"
+                );
+
+
+            const studentClass =
+                getValue(
+                    "actionClass"
+                ).trim();
+
+
+            const section =
+                getValue(
+                    "actionSection"
+                ).trim();
+
+
+            const rollNumber =
+                getValue(
+                    "actionRollNumber"
+                ).trim();
+
+
+            const marks =
+                getValue(
+                    "actionMarks"
+                ).trim();
+
+
+            const attendance =
+                getValue(
+                    "actionAttendance"
+                ).trim();
+
+
+            const feeAmount =
+                getValue(
+                    "actionFeeAmount"
+                );
+
+
+            const transactionId =
+                getValue(
+                    "actionFeeTransactionId"
+                ).trim();
+
+
+            const newPassword =
+                getValue(
+                    "actionNewPassword"
+                );
+
+
+            const message =
+                document.getElementById(
+                    "formMessage"
+                );
+
+
+            const saveButton =
+                document.getElementById(
+                    "saveStudentBtn"
+                );
+
+
+            if (!studentId) {
+
+                showFormMessage(
+                    "Please select a student first.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            showFormMessage(
+                "Processing changes...",
+                ""
+            );
+
+
+            if (saveButton) {
+
+                saveButton.disabled =
+                    true;
+
+                saveButton.textContent =
+                    "Saving...";
+            }
+
+
+            try {
+
+                /* =================================================
+                   UPDATE STUDENT
+                ================================================= */
+
+                await apiRequest(
+
+                    `/api/admin/students/${encodeURIComponent(
+                        studentId
+                    )}`,
+
+                    {
+
+                        method: "PUT",
+
+                        body:
+                            JSON.stringify({
+
+                                fullName,
+
+                                admissionStatus,
+
+                                status
+
+                            })
+
+                    }
+
+                );
+
+
+                /* =================================================
+                   UPDATE STUDENT INFORMATION
+                ================================================= */
+
+                await apiRequest(
+
+                    `/api/admin/student-information/${encodeURIComponent(
+                        studentId
+                    )}`,
+
+                    {
+
+                        method: "PUT",
+
+                        body:
+                            JSON.stringify({
+
+                                class:
+                                    studentClass,
+
+                                section,
+
+                                rollNumber,
+
+                                marks,
+
+                                gpa: marks,
+
+                                attendance
+
+                            })
+
+                    }
+
+                );
+
+
+                /* =================================================
+                   RESET PASSWORD
+                ================================================= */
+
+                if (
+                    newPassword.trim()
+                ) {
+
+                    await apiRequest(
+
+                        "/api/admin/reset-student-password",
+
+                        {
+
+                            method: "POST",
+
+                            body:
+                                JSON.stringify({
+
+                                    studentId,
+
+                                    newPassword
+
+                                })
+
+                        }
+
+                    );
+                }
+
+
+                /* =================================================
+                   ADD FEE
+                ================================================= */
+
+                if (
+                    feeAmount &&
+                    Number(feeAmount) > 0
+                ) {
+
+                    await apiRequest(
+
+                        "/api/admin/add-fee",
+
+                        {
+
+                            method: "POST",
+
+                            body:
+                                JSON.stringify({
+
+                                    studentId,
+
+                                    amount:
+                                        Number(
+                                            feeAmount
+                                        ),
+
+                                    transactionId,
+
+                                    status:
+                                        "Approved",
+
+                                    paymentMethod:
+                                        "bank",
+
+                                    description:
+                                        "Fee payment"
+
+                                })
+
+                        }
+
+                    );
+                }
+
+
+                /* =================================================
+                   SUCCESS
+                ================================================= */
+
+                showFormMessage(
+                    "Student details updated successfully!",
+                    "success"
+                );
+
+
+                setValue(
+                    "actionFeeAmount",
+                    ""
+                );
+
+
+                setValue(
+                    "actionFeeTransactionId",
+                    ""
+                );
+
+
+                setValue(
+                    "actionNewPassword",
+                    ""
+                );
+
+
+                await loadDashboardData();
+
+
+            } catch (error) {
+
+                console.error(
+                    "Admin update error:",
+                    error
+                );
+
+
+                showFormMessage(
+
+                    error.message ||
+                    "An error occurred while updating.",
+
+                    "error"
+
+                );
+
+
+            } finally {
+
+                if (saveButton) {
+
+                    saveButton.disabled =
+                        false;
+
+                    saveButton.textContent =
+                        "Save Student Changes";
+                }
+            }
+
+        }
+    );
+}
+
+
+/* ============================================================
+   STUDENT SEARCH
+============================================================ */
+
+const studentSearch =
+    document.getElementById(
+        "studentSearch"
+    );
+
+
+if (studentSearch) {
+
+    studentSearch.addEventListener(
+        "input",
+        function(event) {
+
+            const term =
+                event.target.value
+                    .toLowerCase()
+                    .trim();
+
+
+            if (!term) {
+
+                renderStudentsTable(
+                    allStudents
+                );
+
+                return;
+            }
+
+
+            const filtered =
+                allStudents.filter(
+                    function(student) {
+
+                        const id =
+                            String(
+                                student.studentId ||
+                                student.id ||
+                                ""
+                            ).toLowerCase();
+
+
+                        const name =
+                            String(
+                                student.fullName ||
+                                student.name ||
+                                ""
+                            ).toLowerCase();
+
+
+                        const email =
+                            String(
+                                student.email ||
+                                ""
+                            ).toLowerCase();
+
+
+                        const phone =
+                            String(
+                                student.phone ||
+                                ""
+                            ).toLowerCase();
+
+
+                        return (
+
+                            id.includes(term) ||
+
+                            name.includes(term) ||
+
+                            email.includes(term) ||
+
+                            phone.includes(term)
+
+                        );
+
+                    }
+                );
+
+
+            renderStudentsTable(
+                filtered
+            );
+
+        }
+    );
+}
+
+
+/* ============================================================
+   ADMIN LOGOUT
+============================================================ */
+
+const logoutButton =
+    document.getElementById(
+        "logoutBtn"
+    );
+
+
+if (logoutButton) {
+
+    logoutButton.addEventListener(
+        "click",
+        async function() {
+
+            try {
+
+                await apiRequest(
+                    "/api/admin/logout",
+                    {
+                        method: "POST"
+                    }
+                );
+
+            } catch (error) {
+
+                console.warn(
+                    "Logout API error:",
+                    error
+                );
+
+            } finally {
+
+                clearAdminStorage();
+
+                window.location.href =
+                    "/admin-login.html";
+            }
+
+        }
+    );
+}
+
+
+/* ============================================================
+   HELPER: GET VALUE
+============================================================ */
+
+function getValue(id) {
+
+    const element =
+        document.getElementById(id);
+
+
+    if (!element) {
+        return "";
+    }
+
+
+    return element.value ?? "";
+}
+
+
+/* ============================================================
+   HELPER: SET VALUE
+============================================================ */
+
+function setValue(
+    id,
+    value
+) {
+
+    const element =
+        document.getElementById(id);
+
+
+    if (element) {
+
+        element.value =
+            value ?? "";
+    }
+}
+
+
+/* ============================================================
+   FORM MESSAGE
+============================================================ */
+
+function showFormMessage(
+    message,
+    type
+) {
+
+    const element =
+        document.getElementById(
+            "formMessage"
+        );
+
+
+    if (!element) {
+        return;
+    }
+
+
+    element.textContent =
+        message;
+
+
+    element.className =
+        "msg-box";
+
+
+    if (type === "success") {
+
+        element.classList.add(
+            "success"
+        );
+
+    } else if (type === "error") {
+
+        element.classList.add(
+            "error"
+        );
+    }
+
+
+    element.style.display =
+        "block";
+}
+
+
+/* ============================================================
+   STATUS BADGE
+============================================================ */
+
+function createStatusBadge(
+    status
+) {
+
+    const value =
+        String(
+            status ??
+            "Pending"
+        );
+
+
+    const normalized =
+        value
+            .toLowerCase()
+            .replace(/\s+/g, "-");
+
+
+    let className =
+        "status-default";
+
+
+    if (
+        normalized === "active"
+    ) {
+
+        className =
+            "status-active";
+    }
+
+
+    if (
+        normalized === "approved"
+    ) {
+
+        className =
+            "status-approved";
+    }
+
+
+    if (
+        normalized === "pending"
+    ) {
+
+        className =
+            "status-pending";
+    }
+
+
+    if (
+        normalized === "inactive"
+    ) {
+
+        className =
+            "status-inactive";
+    }
+
+
+    if (
+        normalized === "rejected"
+    ) {
+
+        className =
+            "status-rejected";
+    }
+
+
+    return `
+        <span class="status ${className}">
+            ${escapeHtml(value)}
+        </span>
+    `;
+}
+
+
+/* ============================================================
+   HTML ESCAPING
+============================================================ */
+
+function escapeHtml(value) {
+
+    return String(
+        value ?? ""
+    )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+}
+
+
+/* ============================================================
+   ATTRIBUTE ESCAPING
+============================================================ */
+
+function escapeAttribute(value) {
+
+    return String(
+        value ?? ""
+    )
+        .replace(
+            /\\/g,
+            "\\\\"
+        )
+        .replace(
+            /'/g,
+            "\\'"
+        );
+}
+
+
+/* ============================================================
+   START DASHBOARD
+============================================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function() {
+
+        const authenticated =
+            await checkAdminSession();
+
+
+        if (authenticated) {
+
+            await loadDashboardData();
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>

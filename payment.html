@@ -1,0 +1,2024 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Nova College | Fee Payment</title>
+
+<style>
+    :root {
+        --blue: #0758a8;
+        --dark-blue: #063b78;
+        --deep-blue: #052e63;
+        --soft-blue: #eef6fd;
+        --border: #d1deea;
+        --text: #173e66;
+        --muted: #6f8192;
+        --white: #ffffff;
+        --green: #197a43;
+        --danger: #c62828;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background:
+            linear-gradient(
+                135deg,
+                #edf6fd 0%,
+                #f7fbff 50%,
+                #e8f2fb 100%
+            );
+        color: var(--text);
+        min-height: 100vh;
+    }
+
+    button,
+    input,
+    select {
+        font-family: inherit;
+    }
+
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
+    .top-header {
+        background:
+            linear-gradient(
+                120deg,
+                #06498d,
+                #0963b9,
+                #064686
+            );
+        color: white;
+        min-height: 72px;
+        box-shadow:
+            0 3px 15px
+            rgba(0, 0, 0, 0.16);
+    }
+
+    .header-inner {
+        width: 94%;
+        max-width: 1200px;
+        min-height: 72px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+    }
+
+    .brand-logo {
+        width: 46px;
+        height: 46px;
+        object-fit: cover;
+        background: white;
+        padding: 4px;
+        border-radius: 7px;
+    }
+
+    .brand h1 {
+        font-size: 22px;
+        margin-bottom: 3px;
+    }
+
+    .brand p {
+        font-size: 9px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        opacity: 0.9;
+    }
+
+    .home-link {
+        color: white;
+        text-decoration: none;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 9px 14px;
+        border-radius: 5px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .home-link:hover {
+        background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* =====================================================
+       NAVIGATION
+    ===================================================== */
+
+    .navbar {
+        background: var(--dark-blue);
+    }
+
+    .nav-inner {
+        width: 94%;
+        max-width: 1200px;
+        min-height: 40px;
+        margin: auto;
+        display: flex;
+        overflow-x: auto;
+    }
+
+    .nav-inner::-webkit-scrollbar {
+        height: 0;
+    }
+
+    .nav-inner a {
+        color: white;
+        text-decoration: none;
+        padding: 12px 16px;
+        font-size: 11px;
+        white-space: nowrap;
+        border-bottom: 3px solid transparent;
+    }
+
+    .nav-inner a:hover,
+    .nav-inner a.active {
+        background: rgba(255, 255, 255, 0.08);
+        border-bottom-color: white;
+    }
+
+    /* =====================================================
+       TIME BAR
+    ===================================================== */
+
+    .timebar {
+        background: var(--deep-blue);
+        color: #dbeafa;
+        font-size: 11px;
+        padding: 10px 0;
+    }
+
+    .timebar-inner {
+        width: 94%;
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    /* =====================================================
+       PAGE
+    ===================================================== */
+
+    .page {
+        width: 94%;
+        max-width: 1200px;
+        margin: auto;
+        padding: 42px 0 48px;
+    }
+
+    .payment-layout {
+        width: 100%;
+        display: grid;
+        grid-template-columns:
+            minmax(300px, 0.85fr)
+            minmax(420px, 1.15fr);
+        background: white;
+        border: 1px solid var(--border);
+        box-shadow:
+            0 15px 45px
+            rgba(7, 55, 105, 0.13);
+        overflow: hidden;
+    }
+
+    /* =====================================================
+       LEFT PANEL
+    ===================================================== */
+
+    .info-panel {
+        background:
+            linear-gradient(
+                145deg,
+                #0758a8,
+                #06407d
+            );
+        color: white;
+        padding: 46px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .info-panel::before {
+        content: "";
+        position: absolute;
+        width: 290px;
+        height: 290px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.06);
+        top: -120px;
+        right: -120px;
+    }
+
+    .info-panel::after {
+        content: "";
+        position: absolute;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        bottom: -110px;
+        left: -100px;
+    }
+
+    .info-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 7px 11px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.23);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 18px;
+    }
+
+    .info-panel h2 {
+        font-size: 33px;
+        line-height: 1.15;
+        margin-bottom: 14px;
+    }
+
+    .info-panel h2 span {
+        color: #b9dcf8;
+    }
+
+    .info-panel p {
+        font-size: 13px;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.86);
+        margin-bottom: 25px;
+    }
+
+    .fee-card {
+        background: rgba(255, 255, 255, 0.10);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 17px;
+        border-radius: 7px;
+        margin-bottom: 17px;
+    }
+
+    .fee-card small {
+        display: block;
+        font-size: 9px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        opacity: 0.8;
+        margin-bottom: 5px;
+    }
+
+    .fee-card strong {
+        display: block;
+        font-size: 31px;
+        margin-bottom: 3px;
+    }
+
+    .fee-card span {
+        font-size: 10px;
+        opacity: 0.8;
+    }
+
+    .info-list {
+        list-style: none;
+    }
+
+    .info-list li {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 11px;
+        margin-bottom: 11px;
+    }
+
+    .info-icon {
+        width: 27px;
+        height: 27px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        background: rgba(255, 255, 255, 0.10);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* =====================================================
+       RIGHT FORM
+    ===================================================== */
+
+    .payment-panel {
+        padding: 42px 45px;
+    }
+
+    .heading {
+        margin-bottom: 22px;
+    }
+
+    .heading h2 {
+        color: var(--dark-blue);
+        font-size: 28px;
+        margin-bottom: 7px;
+    }
+
+    .heading p {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+    /* =====================================================
+       MESSAGE
+    ===================================================== */
+
+    #message {
+        display: none;
+        padding: 11px 13px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    #message.success {
+        display: block;
+        background: #eaf8ef;
+        border: 1px solid #b0dfc0;
+        color: var(--green);
+    }
+
+    #message.error {
+        display: block;
+        background: #fff0f0;
+        border: 1px solid #edb5b5;
+        color: var(--danger);
+    }
+
+    /* =====================================================
+       FORM
+    ===================================================== */
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group.full {
+        grid-column: 1 / -1;
+    }
+
+    .form-group label {
+        display: block;
+        color: #365a79;
+        font-size: 11px;
+        font-weight: 700;
+        margin-bottom: 7px;
+    }
+
+    .input-wrapper {
+        position: relative;
+    }
+
+    .input-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #7890a7;
+        font-size: 13px;
+        pointer-events: none;
+        z-index: 2;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 12px 12px 12px 37px;
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        background: white;
+        color: var(--text);
+        font-size: 12px;
+        outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+        border-color: var(--blue);
+        box-shadow:
+            0 0 0 3px
+            rgba(7, 88, 168, 0.08);
+    }
+
+    .form-group input::placeholder {
+        color: #9aa9b8;
+    }
+
+    .form-group input[readonly] {
+        background: #f6f9fc;
+        cursor: not-allowed;
+    }
+
+    /* =====================================================
+       PAYMENT METHOD
+    ===================================================== */
+
+    .method-section {
+        margin-top: 20px;
+        padding-top: 18px;
+        border-top: 1px solid var(--border);
+    }
+
+    .method-title {
+        color: #365a79;
+        font-size: 11px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .method-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .method {
+        position: relative;
+    }
+
+    .method input {
+        position: absolute;
+        opacity: 0;
+    }
+
+    .method label {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        border: 1px solid var(--border);
+        padding: 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        color: #45627d;
+        font-size: 11px;
+        font-weight: 700;
+        transition: 0.2s;
+    }
+
+    .method label:hover {
+        border-color: var(--blue);
+        background: #f5faff;
+    }
+
+    .method input:checked + label {
+        border-color: var(--blue);
+        background: var(--soft-blue);
+        color: var(--blue);
+    }
+
+    .method-circle {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        border: 2px solid #a7b6c5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .method input:checked + label .method-circle {
+        border-color: var(--blue);
+    }
+
+    .method input:checked + label .method-circle::after {
+        content: "";
+        width: 7px;
+        height: 7px;
+        background: var(--blue);
+        border-radius: 50%;
+    }
+
+    .method-name {
+        flex: 1;
+    }
+
+    .method-amount {
+        color: #75889a;
+        font-size: 10px;
+    }
+
+    /* =====================================================
+       BANK INFORMATION
+    ===================================================== */
+
+    .bank-info {
+        margin-top: 15px;
+        padding: 15px;
+        background: #f7fbff;
+        border: 1px solid #d6e5f1;
+        border-radius: 5px;
+    }
+
+    .bank-info h4 {
+        color: #174a76;
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+
+    .bank-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        padding: 5px 0;
+        border-bottom: 1px solid #e5eef5;
+        font-size: 11px;
+    }
+
+    .bank-row:last-child {
+        border-bottom: 0;
+    }
+
+    .bank-label {
+        color: #738698;
+    }
+
+    .bank-value {
+        color: #174a76;
+        font-weight: 700;
+        text-align: right;
+    }
+
+    /* =====================================================
+       TRANSACTION
+    ===================================================== */
+
+    .transaction-box {
+        margin-top: 18px;
+        padding: 13px;
+        background: #f3f8fc;
+        border: 1px solid #d6e5f1;
+        border-radius: 5px;
+    }
+
+    .transaction-box h4 {
+        color: #174a76;
+        font-size: 11px;
+        margin-bottom: 5px;
+    }
+
+    .transaction-box p {
+        color: #738698;
+        font-size: 10px;
+        line-height: 1.6;
+    }
+
+    #transactionId {
+        margin-top: 7px;
+        font-weight: 700;
+        color: var(--blue);
+        word-break: break-word;
+    }
+
+    /* =====================================================
+       SUBMIT
+    ===================================================== */
+
+    .submit-btn {
+        width: 100%;
+        margin-top: 18px;
+        border: 0;
+        background:
+            linear-gradient(
+                135deg,
+                #0758a8,
+                #0870cf
+            );
+        color: white;
+        padding: 13px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 700;
+        box-shadow:
+            0 7px 17px
+            rgba(7, 88, 168, 0.22);
+        transition: 0.2s;
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-1px);
+    }
+
+    .submit-btn:disabled {
+        opacity: 0.7;
+        cursor: wait;
+        transform: none;
+    }
+
+    /* =====================================================
+       RESULT
+    ===================================================== */
+
+    #paymentResult {
+        display: none;
+        margin-top: 18px;
+        padding: 15px;
+        border-radius: 5px;
+        background: #eff9f2;
+        border: 1px solid #b7dfc4;
+    }
+
+    #paymentResult h3 {
+        color: var(--green);
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+
+    #paymentResult p {
+        color: #557364;
+        font-size: 11px;
+        line-height: 1.6;
+    }
+
+    .result-id {
+        margin-top: 8px;
+        color: var(--blue);
+        font-weight: 700;
+        font-size: 12px;
+        word-break: break-word;
+    }
+
+    /* =====================================================
+       LINKS
+    ===================================================== */
+
+    .bottom-links {
+        text-align: center;
+        margin-top: 20px;
+        padding-top: 18px;
+        border-top: 1px solid var(--border);
+        font-size: 11px;
+        color: #718395;
+    }
+
+    .bottom-links a {
+        color: var(--blue);
+        text-decoration: none;
+        font-weight: 700;
+    }
+
+    .bottom-links a:hover {
+        text-decoration: underline;
+    }
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    footer {
+        background: var(--dark-blue);
+        color: white;
+        padding: 15px;
+        font-size: 10px;
+    }
+
+    .footer-inner {
+        width: 94%;
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    .footer-links {
+        display: flex;
+        gap: 17px;
+    }
+
+    .footer-links a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .footer-links a:hover {
+        text-decoration: underline;
+    }
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media (max-width: 850px) {
+        .payment-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .info-panel {
+            padding: 35px 30px;
+        }
+
+        .payment-panel {
+            padding: 35px 28px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .header-inner {
+            padding: 10px 0;
+        }
+
+        .brand h1 {
+            font-size: 18px;
+        }
+
+        .brand p {
+            display: none;
+        }
+
+        .home-link {
+            padding: 8px 10px;
+            font-size: 10px;
+        }
+
+        .page {
+            width: 94%;
+            padding: 25px 0;
+        }
+
+        .info-panel {
+            padding: 30px 22px;
+        }
+
+        .info-panel h2 {
+            font-size: 26px;
+        }
+
+        .payment-panel {
+            padding: 28px 21px;
+        }
+
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group.full {
+            grid-column: auto;
+        }
+
+        .footer-inner {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .footer-links {
+            justify-content: center;
+        }
+
+        .bank-row {
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .bank-value {
+            text-align: left;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="top-header">
+    <div class="header-inner">
+
+        <div class="brand">
+
+            <img
+                src="novs.jpeg"
+                alt="Nova College"
+                class="brand-logo"
+                onerror="this.style.display='none'"
+            >
+
+            <div>
+                <h1>Nova College</h1>
+                <p>Student Payment Portal</p>
+            </div>
+
+        </div>
+
+        <a
+            href="/admin-dashboard.html"
+            class="home-link"
+            id="backDashboard"
+        >
+            ← Dashboard
+        </a>
+
+    </div>
+</header>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="nav-inner">
+
+        <a href="/admin-dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="/student-information.html">
+            Student Information
+        </a>
+
+        <a
+            href="/payment.html"
+            class="active"
+        >
+            Fee Payment
+        </a>
+
+        <a href="/admission.html">
+            Admission
+        </a>
+
+        <a href="/index.html#programs">
+            Programs
+        </a>
+
+        <a href="/index.html#contact">
+            Contact
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     TIME BAR
+===================================================== -->
+
+<div class="timebar">
+
+    <div class="timebar-inner">
+
+        Nova College Payment Portal |
+        <span id="currentDateTime"></span>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="page">
+
+    <section class="payment-layout">
+
+        <!-- =================================================
+             LEFT INFORMATION
+        ================================================= -->
+
+        <div class="info-panel">
+
+            <div class="info-content">
+
+                <div class="badge">
+                    Secure Fee Payment
+                </div>
+
+                <h2>
+                    Complete your
+                    <span>
+                        college payment.
+                    </span>
+                </h2>
+
+                <p>
+                    Submit the Nova College admission or student
+                    fee payment request using Bank Transfer.
+                </p>
+
+
+                <div class="fee-card">
+
+                    <small>
+                        Admission Fee
+                    </small>
+
+                    <strong>
+                        Rs. 500
+                    </strong>
+
+                    <span>
+                        Required admission payment
+                    </span>
+
+                </div>
+
+
+                <ul class="info-list">
+
+                    <li>
+                        <span class="info-icon">
+                            ✓
+                        </span>
+
+                        Secure payment request
+                    </li>
+
+                    <li>
+                        <span class="info-icon">
+                            ✓
+                        </span>
+
+                        Bank Transfer supported
+                    </li>
+
+                    <li>
+                        <span class="info-icon">
+                            ✓
+                        </span>
+
+                        Admission fee Rs. 500
+                    </li>
+
+                    <li>
+                        <span class="info-icon">
+                            ✓
+                        </span>
+
+                        Transaction ID generated automatically
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             RIGHT PAYMENT FORM
+        ================================================= -->
+
+        <div class="payment-panel">
+
+            <div class="heading">
+
+                <h2>
+                    Fee Payment
+                </h2>
+
+                <p>
+                    Enter the student's information and submit
+                    the Bank Transfer payment request.
+                </p>
+
+            </div>
+
+
+            <div id="message"></div>
+
+
+            <form id="paymentForm">
+
+                <div class="form-grid">
+
+                    <!-- NAME -->
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Student Name
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                👤
+                            </span>
+
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Enter student name"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                ✉
+                            </span>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Enter email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Phone Number
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                ☎
+                            </span>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="03XXXXXXXXX"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- COURSE -->
+
+                    <div class="form-group">
+
+                        <label for="course">
+                            Course
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                🎓
+                            </span>
+
+                            <select
+                                id="course"
+                                name="course"
+                                required
+                            >
+
+                                <option value="">
+                                    Select Course
+                                </option>
+
+                                <option value="Computer Science">
+                                    Computer Science
+                                </option>
+
+                                <option value="Pre-Medical">
+                                    Pre-Medical
+                                </option>
+
+                                <option value="Pre-Engineering">
+                                    Pre-Engineering
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- AMOUNT -->
+
+                    <div class="form-group full">
+
+                        <label for="amount">
+                            Payment Amount
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                ₨
+                            </span>
+
+                            <input
+                                type="number"
+                                id="amount"
+                                name="amount"
+                                value="500"
+                                min="500"
+                                max="500"
+                                readonly
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     PAYMENT METHOD
+                ================================================= -->
+
+                <div class="method-section">
+
+                    <div class="method-title">
+                        Select Payment Method
+                    </div>
+
+                    <div class="method-grid">
+
+                        <div class="method">
+
+                            <input
+                                type="radio"
+                                name="paymentMethod"
+                                id="bank"
+                                value="bank"
+                                checked
+                                required
+                            >
+
+                            <label for="bank">
+
+                                <span class="method-circle"></span>
+
+                                <span class="method-name">
+                                    Bank Transfer
+                                </span>
+
+                                <span class="method-amount">
+                                    Rs. 500
+                                </span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     BANK INFORMATION
+                ================================================= -->
+
+                <div class="bank-info">
+
+                    <h4>
+                        Bank Transfer Information
+                    </h4>
+
+                    <div class="bank-row">
+
+                        <span class="bank-label">
+                            Payment Method
+                        </span>
+
+                        <span class="bank-value">
+                            Bank Transfer
+                        </span>
+
+                    </div>
+
+                    <div class="bank-row">
+
+                        <span class="bank-label">
+                            Required Amount
+                        </span>
+
+                        <span class="bank-value">
+                            Rs. 500
+                        </span>
+
+                    </div>
+
+                    <div class="bank-row">
+
+                        <span class="bank-label">
+                            Payment Status
+                        </span>
+
+                        <span class="bank-value">
+                            Pending Verification
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     TRANSACTION INFORMATION
+                ================================================= -->
+
+                <div class="transaction-box">
+
+                    <h4>
+                        Payment Information
+                    </h4>
+
+                    <p>
+                        Your payment request will be sent to
+                        the Nova College server. A unique
+                        transaction ID will be generated for
+                        your request.
+                    </p>
+
+                    <div id="transactionId"></div>
+
+                </div>
+
+
+                <!-- =================================================
+                     SUBMIT
+                ================================================= -->
+
+                <button
+                    type="submit"
+                    id="paymentButton"
+                    class="submit-btn"
+                >
+                    Submit Payment Request
+                </button>
+
+
+                <!-- =================================================
+                     RESULT
+                ================================================= -->
+
+                <div id="paymentResult">
+
+                    <h3>
+                        Payment Request Submitted
+                    </h3>
+
+                    <p>
+                        Your payment request has reached
+                        the Nova College server successfully.
+                        Please keep your transaction ID.
+                    </p>
+
+                    <div
+                        class="result-id"
+                        id="resultTransactionId"
+                    ></div>
+
+                </div>
+
+
+                <!-- =================================================
+                     LINKS
+                ================================================= -->
+
+                <div class="bottom-links">
+
+                    Need help?
+
+                    <a href="/index.html#contact">
+                        Contact Nova College
+                    </a>
+
+                    &nbsp; | &nbsp;
+
+                    <a
+                        href="/admin-dashboard.html"
+                        id="bottomDashboard"
+                    >
+                        Back to Dashboard
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-inner">
+
+        <div>
+            © 2026 Nova College.
+            All rights reserved.
+        </div>
+
+        <div class="footer-links">
+
+            <a href="/admin-dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="/student-information.html">
+                Student Information
+            </a>
+
+            <a href="/index.html#contact">
+                Contact
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =====================================================
+     PAYMENT JAVASCRIPT
+===================================================== -->
+
+<script>
+    "use strict";
+
+
+    /* =====================================================
+       AUTH TOKEN
+    ===================================================== */
+
+    function getAuthToken() {
+
+        return (
+            localStorage.getItem("novaAdminToken") ||
+            localStorage.getItem("adminToken") ||
+            localStorage.getItem("token") ||
+            sessionStorage.getItem("novaAdminToken") ||
+            sessionStorage.getItem("adminToken") ||
+            sessionStorage.getItem("token") ||
+            ""
+        );
+    }
+
+
+    /* =====================================================
+       STORED USER
+    ===================================================== */
+
+    function getStoredUser() {
+
+        try {
+
+            const savedUser =
+                localStorage.getItem("novaAdminUser") ||
+                localStorage.getItem("adminUser") ||
+                localStorage.getItem("user") ||
+                sessionStorage.getItem("novaAdminUser") ||
+                sessionStorage.getItem("adminUser") ||
+                sessionStorage.getItem("user");
+
+            if (savedUser) {
+                return JSON.parse(savedUser);
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Could not read saved user:",
+                error
+            );
+
+        }
+
+        return null;
+    }
+
+
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
+
+    const paymentForm =
+        document.getElementById("paymentForm");
+
+    const amountInput =
+        document.getElementById("amount");
+
+    const message =
+        document.getElementById("message");
+
+    const button =
+        document.getElementById("paymentButton");
+
+    const result =
+        document.getElementById("paymentResult");
+
+    const resultId =
+        document.getElementById("resultTransactionId");
+
+    const transactionElement =
+        document.getElementById("transactionId");
+
+
+    /* =====================================================
+       CLOCK
+    ===================================================== */
+
+    function updatePaymentClock() {
+
+        const element =
+            document.getElementById(
+                "currentDateTime"
+            );
+
+        if (!element) {
+            return;
+        }
+
+        const now = new Date();
+
+        element.textContent =
+            now.toLocaleString(
+                "en-PK",
+                {
+                    weekday: "short",
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit"
+                }
+            );
+    }
+
+    updatePaymentClock();
+
+    setInterval(
+        updatePaymentClock,
+        1000
+    );
+
+
+    /* =====================================================
+       LOGIN CHECK
+    ===================================================== */
+
+    const authToken =
+        getAuthToken();
+
+    if (!authToken) {
+
+        showMessage(
+            "Please login before submitting a payment.",
+            "error"
+        );
+
+        if (button) {
+            button.disabled = true;
+        }
+
+    }
+
+
+    /* =====================================================
+       AUTO-FILL USER INFORMATION
+    ===================================================== */
+
+    const storedUser =
+        getStoredUser();
+
+    if (storedUser) {
+
+        const nameInput =
+            document.getElementById("name");
+
+        const emailInput =
+            document.getElementById("email");
+
+        const phoneInput =
+            document.getElementById("phone");
+
+        const courseInput =
+            document.getElementById("course");
+
+
+        if (nameInput && storedUser.name) {
+
+            nameInput.value =
+                storedUser.name;
+
+        }
+
+
+        if (emailInput && storedUser.email) {
+
+            emailInput.value =
+                storedUser.email;
+
+        }
+
+
+        if (phoneInput && storedUser.phone) {
+
+            phoneInput.value =
+                storedUser.phone;
+
+        }
+
+
+        if (courseInput && storedUser.course) {
+
+            courseInput.value =
+                storedUser.course;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       MESSAGE HELPER
+    ===================================================== */
+
+    function showMessage(
+        text,
+        type
+    ) {
+
+        if (!message) {
+            return;
+        }
+
+        message.textContent =
+            text;
+
+        message.className =
+            type;
+
+        message.style.display =
+            "block";
+    }
+
+
+    function hideMessage() {
+
+        if (!message) {
+            return;
+        }
+
+        message.style.display =
+            "none";
+
+        message.className = "";
+
+    }
+
+
+    /* =====================================================
+       LOCAL TRANSACTION PREVIEW
+    ===================================================== */
+
+    function generatePreviewTransaction() {
+
+        if (!transactionElement) {
+            return;
+        }
+
+        const random =
+            Math.random()
+                .toString(36)
+                .substring(2, 8)
+                .toUpperCase();
+
+        transactionElement.textContent =
+            "Payment reference: NOVA-" +
+            Date.now() +
+            "-" +
+            random;
+    }
+
+    generatePreviewTransaction();
+
+
+    /* =====================================================
+       PAYMENT FORM
+    ===================================================== */
+
+    if (paymentForm) {
+
+        paymentForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+
+                /* -----------------------------------------
+                   TOKEN
+                ----------------------------------------- */
+
+                const currentToken =
+                    getAuthToken();
+
+                if (!currentToken) {
+
+                    showMessage(
+                        "Your login session has expired. Please login again.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                /* -----------------------------------------
+                   FORM VALUES
+                ----------------------------------------- */
+
+                const name =
+                    document
+                        .getElementById("name")
+                        .value
+                        .trim();
+
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
+
+                const phone =
+                    document
+                        .getElementById("phone")
+                        .value
+                        .trim();
+
+                const course =
+                    document
+                        .getElementById("course")
+                        .value;
+
+                /*
+                 * IMPORTANT:
+                 * Payment amount is fixed at Rs. 500.
+                 */
+                const amount = 500;
+
+                const selectedMethod =
+                    document.querySelector(
+                        'input[name="paymentMethod"]:checked'
+                    );
+
+
+                /* -----------------------------------------
+                   VALIDATION
+                ----------------------------------------- */
+
+                if (!name) {
+
+                    showMessage(
+                        "Please enter the student name.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (!email) {
+
+                    showMessage(
+                        "Please enter the email address.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (!phone) {
+
+                    showMessage(
+                        "Please enter the phone number.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (!course) {
+
+                    showMessage(
+                        "Please select the course.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (!selectedMethod) {
+
+                    showMessage(
+                        "Please select Bank Transfer.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    selectedMethod.value !== "bank"
+                ) {
+
+                    showMessage(
+                        "Only Bank Transfer is supported.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                /* -----------------------------------------
+                   START REQUEST
+                ----------------------------------------- */
+
+                button.disabled =
+                    true;
+
+                button.textContent =
+                    "Submitting Payment...";
+
+                hideMessage();
+
+                result.style.display =
+                    "none";
+
+
+                try {
+
+                    /*
+                     * Main payment API route.
+                     */
+                    const response =
+                        await fetch(
+                            "/api/payment/create",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json",
+
+                                    "Accept":
+                                        "application/json",
+
+                                    "Authorization":
+                                        "Bearer " +
+                                        currentToken
+                                },
+
+                                body:
+                                    JSON.stringify({
+                                        name:
+                                            name,
+
+                                        email:
+                                            email,
+
+                                        phone:
+                                            phone,
+
+                                        course:
+                                            course,
+
+                                        amount:
+                                            amount,
+
+                                        paymentMethod:
+                                            "bank"
+                                    })
+                            }
+                        );
+
+
+                    /* -------------------------------------
+                       RESPONSE
+                    ------------------------------------- */
+
+                    const contentType =
+                        response.headers.get(
+                            "content-type"
+                        ) || "";
+
+                    let data;
+
+
+                    if (
+                        contentType
+                            .toLowerCase()
+                            .includes(
+                                "application/json"
+                            )
+                    ) {
+
+                        data =
+                            await response.json();
+
+                    } else {
+
+                        const responseText =
+                            await response.text();
+
+                        throw new Error(
+                            responseText ||
+                            "Server returned an unexpected response."
+                        );
+
+                    }
+
+
+                    /* -------------------------------------
+                       AUTH ERROR
+                    ------------------------------------- */
+
+                    if (
+                        response.status === 401 ||
+                        response.status === 403
+                    ) {
+
+                        throw new Error(
+                            data.message ||
+                            "Your login session has expired or is not authorized."
+                        );
+
+                    }
+
+
+                    /* -------------------------------------
+                       API ERROR
+                    ------------------------------------- */
+
+                    if (
+                        !response.ok ||
+                        !data.success
+                    ) {
+
+                        throw new Error(
+                            data.message ||
+                            "Payment request failed."
+                        );
+
+                    }
+
+
+                    /* -------------------------------------
+                       TRANSACTION ID
+                    ------------------------------------- */
+
+                    const transaction =
+                        data.transactionId ||
+                        data.transaction?.transactionId ||
+                        data.payment?.transactionId ||
+                        data.data?.transactionId ||
+                        "NOVA-PENDING";
+
+
+                    /* -------------------------------------
+                       SUCCESS
+                    ------------------------------------- */
+
+                    showMessage(
+                        data.message ||
+                        "Payment request submitted successfully.",
+                        "success"
+                    );
+
+
+                    resultId.textContent =
+                        "Transaction ID: " +
+                        transaction;
+
+
+                    result.style.display =
+                        "block";
+
+
+                    if (transactionElement) {
+
+                        transactionElement.textContent =
+                            "Transaction ID: " +
+                            transaction;
+
+                    }
+
+
+                    button.textContent =
+                        "Payment Submitted";
+
+                    button.disabled =
+                        true;
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Payment error:",
+                        error
+                    );
+
+
+                    showMessage(
+                        error.message ||
+                        "Cannot connect to the Nova College server. Make sure Node.js and MongoDB are running.",
+                        "error"
+                    );
+
+
+                    button.disabled =
+                        false;
+
+                    button.textContent =
+                        "Submit Payment Request";
+
+                }
+
+            }
+        );
+
+    }
+</script>
+```
+
+</body>
+</html>

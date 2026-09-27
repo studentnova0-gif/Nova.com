@@ -1,0 +1,1864 @@
+/* =========================================================
+   NOVA COLLEGE
+   COMPLETE WEBSITE STYLESHEET
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    color: #172033;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* =========================================================
+   WELCOME SCREEN
+   ========================================================= */
+
+#welcome-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background:
+        radial-gradient(circle at top right, rgba(212, 175, 55, 0.18), transparent 35%),
+        linear-gradient(135deg, #07152f, #0b2d5c 55%, #061126);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    animation: welcomeHide 1s ease 4.5s forwards;
+}
+
+.welcome-content {
+    width: min(90%, 700px);
+    animation: welcomeZoom 1.2s ease;
+}
+
+.welcome-logo {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    border: 4px solid #d4af37;
+    box-shadow:
+        0 0 25px rgba(212, 175, 55, 0.45),
+        0 0 70px rgba(255, 255, 255, 0.08);
+}
+
+.welcome-content h1 {
+    color: #ffffff;
+    font-size: clamp(2.3rem, 7vw, 5rem);
+    letter-spacing: 8px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.welcome-text {
+    color: #d4af37;
+    font-size: clamp(1.1rem, 3vw, 1.7rem);
+    font-weight: 600;
+}
+
+.welcome-subtitle {
+    color: #dce8f7;
+    margin-top: 8px;
+    letter-spacing: 4px;
+    font-size: 0.85rem;
+}
+
+.welcome-loader {
+    width: min(320px, 80%);
+    height: 5px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    margin: 35px auto 0;
+    overflow: hidden;
+}
+
+.loader-bar {
+    width: 0;
+    height: 100%;
+    background: #d4af37;
+    animation: loadingBar 4s ease forwards;
+}
+
+@keyframes loadingBar {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes welcomeZoom {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes welcomeHide {
+    to {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+}
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    min-height: 75px;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    background: rgba(7, 21, 47, 0.97);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.12);
+}
+
+.logo {
+    color: #ffffff;
+    font-size: 1.55rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: #d4af37;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+nav ul li a {
+    display: block;
+    color: #ffffff;
+    padding: 10px 12px;
+    border-radius: 7px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #d4af37;
+    background: rgba(255,255,255,0.07);
+}
+
+.nav-portal-btn {
+    background: #d4af37;
+    color: #07152f !important;
+    font-weight: 700 !important;
+    margin-left: 5px;
+}
+
+.nav-portal-btn:hover {
+    background: #ffffff !important;
+    color: #07152f !important;
+}
+
+/* =========================================================
+   PROMOTED SCHOLARSHIP BANNER
+   ========================================================= */
+
+.custom-ad-banner {
+    position: relative;
+    padding: 22px 5%;
+    text-align: center;
+    background:
+        linear-gradient(90deg, #d4af37, #f4d878, #d4af37);
+    color: #07152f;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.ad-badge {
+    display: inline-block;
+    background: #07152f;
+    color: #ffffff;
+    padding: 4px 12px;
+    border-radius: 30px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.custom-ad-banner h3 {
+    font-size: 1.35rem;
+    margin-bottom: 2px;
+}
+
+.custom-ad-banner p {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+}
+
+.ad-btn {
+    display: inline-block;
+    padding: 8px 18px;
+    background: #07152f;
+    color: #ffffff;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: 0.3s ease;
+}
+
+.ad-btn:hover {
+    background: #123d70;
+    transform: translateY(-2px);
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+    position: relative;
+    min-height: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    background:
+        linear-gradient(
+            rgba(5, 17, 38, 0.88),
+            rgba(7, 31, 67, 0.92)
+        );
+}
+
+.hero-background-logo {
+    position: absolute;
+    width: min(750px, 90vw);
+    height: min(750px, 90vw);
+    object-fit: contain;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.07;
+    filter: grayscale(100%);
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    width: min(900px, 90%);
+    color: #ffffff;
+}
+
+.hero-content h1 {
+    font-size: clamp(2.3rem, 6vw, 5rem);
+    line-height: 1.1;
+    margin-bottom: 22px;
+    font-weight: 800;
+}
+
+.hero-content h1 span {
+    color: #d4af37;
+}
+
+.hero-content p {
+    max-width: 720px;
+    margin: 0 auto 30px;
+    color: #d9e5f5;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.gold-btn,
+.white-btn {
+    display: inline-block;
+    padding: 13px 26px;
+    border-radius: 7px;
+    font-weight: 700;
+    transition: 0.3s ease;
+}
+
+.gold-btn {
+    background: #d4af37;
+    color: #07152f;
+}
+
+.gold-btn:hover {
+    background: #f0d36d;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(212,175,55,0.25);
+}
+
+.white-btn {
+    background: #ffffff;
+    color: #07152f;
+}
+
+.white-btn:hover {
+    background: #d4af37;
+    transform: translateY(-3px);
+}
+
+/* =========================================================
+   GENERAL SECTIONS
+   ========================================================= */
+
+section {
+    padding: 90px 6%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-title h2 {
+    color: #07152f;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin-bottom: 8px;
+}
+
+.section-title p {
+    color: #68758a;
+    font-size: 1rem;
+}
+
+.section-title h2::after {
+    content: "";
+    display: block;
+    width: 65px;
+    height: 4px;
+    background: #d4af37;
+    margin: 13px auto 0;
+    border-radius: 20px;
+}
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.cards {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.card {
+    background: #ffffff;
+    padding: 30px 25px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid #e7ebf2;
+    box-shadow: 0 10px 30px rgba(20, 40, 80, 0.07);
+    transition: 0.35s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 40px rgba(20, 40, 80, 0.13);
+    border-color: rgba(212,175,55,0.5);
+}
+
+.card .icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef4fb;
+    border-radius: 50%;
+    font-size: 2rem;
+}
+
+.card h3 {
+    color: #07152f;
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+}
+
+.card p {
+    color: #68758a;
+}
+
+/* =========================================================
+   PRINCIPAL
+   ========================================================= */
+
+.principal {
+    display: grid;
+    grid-template-columns: minmax(250px, 420px) 1fr;
+    align-items: center;
+    gap: 60px;
+    background: #ffffff;
+}
+
+.principal > img {
+    width: 100%;
+    max-width: 400px;
+    height: 450px;
+    object-fit: cover;
+    margin: auto;
+    border-radius: 18px;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.16);
+    border: 5px solid #ffffff;
+}
+
+.principal-text h2 {
+    color: #07152f;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 20px;
+}
+
+.principal-text h2::after {
+    content: "";
+    display: block;
+    width: 70px;
+    height: 4px;
+    background: #d4af37;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.principal-text p {
+    color: #59677b;
+    margin-bottom: 15px;
+    max-width: 750px;
+}
+
+.principal-text strong {
+    color: #07152f;
+}
+
+/* =========================================================
+   PROGRAMS
+   ========================================================= */
+
+#programs {
+    background: #f8faff;
+}
+/* =========================================================
+   NOVA COLLEGE - FACULTY SECTION
+   PROFESSIONAL FACULTY CARDS
+   ========================================================= */
+
+#faculty {
+    background: #f5f7fb;
+    padding: 90px 6%;
+}
+
+#faculty .section-title {
+    margin-bottom: 50px;
+}
+
+#faculty .section-title h2 {
+    color: #07152f;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 800;
+}
+
+#faculty .section-title p {
+    color: #69778b;
+    font-size: 1rem;
+}
+
+/* Faculty grid */
+
+#faculty .cards {
+    max-width: 1250px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+
+    align-items: stretch;
+}
+
+/* Faculty card */
+
+#faculty .faculty-card {
+    position: relative;
+
+    padding: 0 0 25px;
+
+    background: #ffffff;
+
+    border: 1px solid #e3e8f0;
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    text-align: center;
+
+    box-shadow: 0 8px 25px rgba(7, 21, 47, 0.07);
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+}
+
+/* Hover */
+
+#faculty .faculty-card:hover {
+    transform: translateY(-9px);
+
+    border-color: rgba(212, 175, 55, 0.7);
+
+    box-shadow:
+        0 18px 40px rgba(7, 21, 47, 0.14),
+        0 0 0 1px rgba(212, 175, 55, 0.08);
+}
+
+/* =========================================================
+   FACULTY IMAGE
+   ========================================================= */
+
+#faculty .faculty-card img {
+    width: 100%;
+    height: 285px;
+
+    object-fit: cover;
+    object-position: center top;
+
+    display: block;
+
+    background: #e9eef5;
+
+    transition: transform 0.45s ease;
+}
+
+#faculty .faculty-card:hover img {
+    transform: scale(1.04);
+}
+
+/* Gold image line */
+
+#faculty .faculty-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: #d4af37;
+
+    z-index: 2;
+}
+
+/* =========================================================
+   FACULTY INFORMATION
+   ========================================================= */
+
+#faculty .faculty-card h3 {
+    color: #07152f;
+
+    font-size: 1.25rem;
+    font-weight: 800;
+
+    margin: 20px 15px 6px;
+
+    line-height: 1.3;
+}
+
+#faculty .faculty-card .dev-role {
+    color: #b18a13 !important;
+
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    margin: 0 15px 10px;
+
+    line-height: 1.4;
+}
+
+/* General faculty information */
+
+#faculty .faculty-card p:not(.dev-role) {
+    color: #69778b;
+
+    font-size: 0.85rem;
+
+    line-height: 1.55;
+
+    margin: 5px 18px;
+}
+
+/* Experience */
+
+#faculty .faculty-card .dev-phone {
+    color: #647286;
+
+    font-size: 0.84rem;
+
+    margin: 5px 15px;
+
+    line-height: 1.5;
+}
+
+/* =========================================================
+   QUALIFICATION TEXT
+   ========================================================= */
+
+#faculty .faculty-card p {
+    white-space: normal;
+}
+
+#faculty .faculty-card p + p {
+    margin-top: 6px;
+}
+
+/* =========================================================
+   LONG INFORMATION CARDS
+   ========================================================= */
+
+#faculty .faculty-card:nth-child(5) p {
+    font-size: 0.8rem;
+    line-height: 1.45;
+}
+
+/* =========================================================
+   FACULTY CARD NUMBER / DEPARTMENT BADGE
+   ========================================================= */
+
+#faculty .faculty-card .dev-role {
+    display: inline-block;
+
+    background: #fff8df;
+
+    border: 1px solid rgba(212, 175, 55, 0.25);
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+}
+
+/* =========================================================
+   DESKTOP - 4 CARDS
+   ========================================================= */
+
+@media (min-width: 1200px) {
+
+    #faculty .faculty-card img {
+        height: 300px;
+    }
+
+    #faculty .faculty-card h3 {
+        font-size: 1.28rem;
+    }
+}
+
+/* =========================================================
+   LAPTOP / TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    #faculty .cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+
+    #faculty .faculty-card img {
+        height: 300px;
+    }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    #faculty {
+        padding: 65px 5%;
+    }
+
+    #faculty .cards {
+        grid-template-columns: 1fr;
+
+        max-width: 430px;
+
+        gap: 25px;
+    }
+
+    #faculty .faculty-card img {
+        height: 330px;
+    }
+
+    #faculty .faculty-card h3 {
+        font-size: 1.3rem;
+        margin-top: 22px;
+    }
+
+    #faculty .faculty-card .dev-role {
+        font-size: 0.88rem;
+    }
+
+    #faculty .faculty-card p:not(.dev-role) {
+        font-size: 0.88rem;
+    }
+}
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    #faculty .faculty-card img {
+        height: 290px;
+    }
+
+    #faculty .faculty-card h3 {
+        font-size: 1.2rem;
+    }
+}
+/* =========================================================
+   NOVA COLLEGE - CAMPUS FACILITIES
+   PROFESSIONAL FACILITY CARDS
+   ========================================================= */
+
+#facilities {
+    background: #f5f7fb;
+    padding: 90px 6%;
+}
+
+/* Section heading */
+
+#facilities .section-title {
+    margin-bottom: 50px;
+}
+
+#facilities .section-title h2 {
+    color: #07152f;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 800;
+}
+
+#facilities .section-title p {
+    color: #69778b;
+    font-size: 1rem;
+}
+
+/* Facility grid */
+
+#facilities .feature-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* Facility card */
+
+#facilities .feature-card {
+    position: relative;
+
+    background: #ffffff;
+    padding: 35px 25px;
+
+    min-height: 250px;
+
+    border: 1px solid #e3e8f0;
+    border-radius: 18px;
+
+    text-align: center;
+
+    box-shadow: 0 10px 30px rgba(7, 21, 47, 0.07);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+}
+
+/* Gold top line */
+
+#facilities .feature-card::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: #d4af37;
+}
+
+/* Hover */
+
+#facilities .feature-card:hover {
+    transform: translateY(-8px);
+
+    border-color: rgba(212, 175, 55, 0.65);
+
+    box-shadow:
+        0 18px 40px rgba(7, 21, 47, 0.13),
+        0 0 0 1px rgba(212, 175, 55, 0.08);
+}
+
+/* Facility icon */
+
+#facilities .feature-icon {
+    width: 78px;
+    height: 78px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eef4fb;
+
+    border: 1px solid #dfe7f1;
+
+    border-radius: 50%;
+
+    font-size: 2.2rem;
+
+    transition:
+        transform 0.35s ease,
+        background 0.35s ease;
+}
+
+/* Icon hover */
+
+#facilities .feature-card:hover .feature-icon {
+    transform: scale(1.08);
+
+    background: #fff8df;
+}
+
+/* Facility title */
+
+#facilities .feature-card h3 {
+    color: #07152f;
+
+    font-size: 1.25rem;
+    font-weight: 800;
+
+    margin-bottom: 10px;
+}
+
+/* Facility description */
+
+#facilities .feature-card p {
+    color: #68758a;
+
+    font-size: 0.92rem;
+
+    line-height: 1.65;
+
+    max-width: 310px;
+
+    margin: 0 auto;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    #facilities .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 22px;
+    }
+
+    #facilities .feature-card {
+        min-height: 245px;
+    }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    #facilities {
+        padding: 65px 5%;
+    }
+
+    #facilities .section-title {
+        margin-bottom: 35px;
+    }
+
+    #facilities .feature-grid {
+        grid-template-columns: 1fr;
+
+        max-width: 450px;
+
+        gap: 20px;
+    }
+
+    #facilities .feature-card {
+        min-height: auto;
+
+        padding: 30px 22px;
+    }
+
+    #facilities .feature-icon {
+        width: 72px;
+        height: 72px;
+
+        font-size: 2rem;
+
+        margin-bottom: 17px;
+    }
+
+    #facilities .feature-card h3 {
+        font-size: 1.2rem;
+    }
+
+    #facilities .feature-card p {
+        font-size: 0.9rem;
+    }
+}
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    #facilities {
+        padding: 55px 4%;
+    }
+
+    #facilities .feature-card {
+        padding: 27px 18px;
+    }
+
+    #facilities .feature-icon {
+        width: 68px;
+        height: 68px;
+
+        font-size: 1.9rem;
+    }
+
+    #facilities .feature-card h3 {
+        font-size: 1.15rem;
+    }
+
+    #facilities .feature-card p {
+        font-size: 0.87rem;
+        line-height: 1.6;
+    }
+}
+/* =========================================================
+   STUDENT LIFE
+   ========================================================= */
+
+.feature-dark {
+    background:
+        linear-gradient(135deg, #07152f, #0c3263);
+    color: #ffffff;
+}
+
+.feature-dark .section-title h2 {
+    color: #ffffff;
+}
+
+.feature-dark .section-title p {
+    color: #ccd9eb;
+}
+
+.student-life-grid {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.life-box {
+    text-align: center;
+    padding: 30px 20px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 15px;
+    transition: 0.3s ease;
+}
+
+.life-box:hover {
+    background: rgba(212,175,55,0.12);
+    transform: translateY(-5px);
+}
+
+.life-box span {
+    display: block;
+    font-size: 2.4rem;
+    margin-bottom: 15px;
+}
+
+.life-box h3 {
+    margin-bottom: 8px;
+}
+
+.life-box p {
+    color: #cbd7e7;
+    font-size: 0.92rem;
+}
+
+/* =========================================================
+   SCHOLARSHIPS
+   ========================================================= */
+
+.info-panel {
+    max-width: 1050px;
+    margin: auto;
+    padding: 35px;
+    background: #ffffff;
+    border-left: 5px solid #d4af37;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(20,40,80,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.info-panel-icon {
+    font-size: 2.5rem;
+    float: left;
+    margin-right: 20px;
+}
+
+.info-panel h3 {
+    color: #07152f;
+    margin-bottom: 8px;
+}
+
+.info-panel p {
+    color: #68758a;
+}
+
+.small-btn {
+    white-space: nowrap;
+}
+
+/* =========================================================
+   DOWNLOADS
+   ========================================================= */
+
+.downloads-section {
+    background: #ffffff;
+}
+
+.download-grid {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.download-card {
+    background: #f6f8fc;
+    padding: 25px 18px;
+    border: 1px solid #e2e8f1;
+    border-radius: 12px;
+    color: #07152f;
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.download-card:hover {
+    transform: translateY(-5px);
+    border-color: #d4af37;
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(20,40,80,0.08);
+}
+
+.download-card span {
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.download-card strong,
+.download-card small {
+    display: block;
+}
+
+.download-card small {
+    color: #7a8698;
+    margin-top: 4px;
+}
+
+/* =========================================================
+   CAREER
+   ========================================================= */
+
+.career-section {
+    background: #f7f9fc;
+}
+
+.career-grid {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.career-card {
+    padding: 35px 25px;
+    background: #ffffff;
+    text-align: center;
+    border-radius: 15px;
+    border-bottom: 4px solid #d4af37;
+    box-shadow: 0 10px 30px rgba(20,40,80,0.07);
+}
+
+.career-card span {
+    font-size: 2.4rem;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.career-card h3 {
+    color: #07152f;
+    margin-bottom: 8px;
+}
+
+.career-card p {
+    color: #68758a;
+}
+
+/* =========================================================
+   GALLERY
+   ========================================================= */
+
+.gallery-container {
+    background:
+        linear-gradient(135deg, #07152f, #0b2e5c);
+    padding: 90px 6%;
+}
+
+.gallery-container > h1 {
+    color: #ffffff;
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 3.3rem);
+    margin-bottom: 5px;
+}
+
+.gallery-container .subtitle {
+    color: #ccd9eb;
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.gallery-grid {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.gallery-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #ffffff;
+    min-height: 300px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.18);
+}
+
+.gallery-card img {
+    width: 100%;
+    height: 330px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-card:hover img {
+    transform: scale(1.08);
+}
+
+.caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    color: #ffffff;
+    font-weight: 700;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
+    padding-top: 45px;
+}
+
+/* =========================================================
+   NOTICES
+   ========================================================= */
+
+.notice {
+    background: #ffffff;
+}
+
+.notice-list {
+    max-width: 900px;
+    margin: auto;
+}
+
+.notice-item {
+    padding: 18px 22px;
+    margin-bottom: 12px;
+    background: #f5f8fc;
+    border-left: 4px solid #d4af37;
+    border-radius: 7px;
+    color: #25334a;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.notice-item:hover {
+    transform: translateX(5px);
+    background: #edf3fa;
+}
+
+/* =========================================================
+   STUDENT PORTAL CTA
+   ========================================================= */
+
+.portal-cta {
+    margin: 0;
+    padding: 60px 8%;
+    background:
+        linear-gradient(100deg, #0a2348, #0d4079);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.portal-kicker {
+    display: block;
+    color: #d4af37;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.portal-cta h2 {
+    font-size: clamp(1.7rem, 4vw, 2.7rem);
+    margin-bottom: 8px;
+}
+
+.portal-cta p {
+    color: #cbd9eb;
+    max-width: 750px;
+}
+
+/* =========================================================
+   CONTACT
+   ========================================================= */
+
+#contact {
+    background: #f7f9fc;
+}
+
+.contact-box {
+    max-width: 700px;
+    margin: auto;
+    padding: 35px;
+    background: #ffffff;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 12px 30px rgba(20,40,80,0.08);
+}
+
+.contact-box p {
+    color: #35445b;
+    font-size: 1.05rem;
+    margin: 12px 0;
+}
+
+/* =========================================================
+   DEVELOPERS
+   ========================================================= */
+
+.developers-section {
+    padding: 90px 6%;
+    background:
+        linear-gradient(135deg, #061126, #0b2d5c);
+}
+
+.developers-section > h2.section-title {
+    color: #ffffff;
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 45px;
+}
+
+.developers-section > h2.section-title::after {
+    content: "";
+    display: block;
+    width: 70px;
+    height: 4px;
+    background: #d4af37;
+    margin: 12px auto 0;
+    border-radius: 10px;
+}
+
+.developers-container {
+    max-width: 1050px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.developer-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.13);
+    padding: 30px 20px;
+    text-align: center;
+    border-radius: 18px;
+    transition: 0.35s ease;
+}
+
+.developer-card:hover {
+    transform: translateY(-8px);
+    border-color: #d4af37;
+    background: rgba(255,255,255,0.12);
+}
+
+.developer-img {
+    width: 135px;
+    height: 135px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 auto 18px;
+    border: 4px solid #d4af37;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+.developer-card h3 {
+    color: #ffffff;
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+}
+
+.developer-card .dev-role {
+    color: #d4af37 !important;
+    font-weight: 700;
+}
+
+.developer-card .main-role {
+    color: #f2d36a !important;
+}
+
+.developer-card .dev-phone {
+    color: #d0d9e7;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+    padding: 25px 5%;
+    text-align: center;
+    background: #030b19;
+    color: #91a0b5;
+    font-size: 0.9rem;
+}
+
+footer span {
+    color: #d4af37;
+    font-weight: 700;
+}
+
+/* =========================================================
+   RESPONSIVE TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    nav {
+        flex-direction: column;
+        padding: 15px 4%;
+    }
+
+    nav ul {
+        justify-content: center;
+    }
+
+    .cards,
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .student-life-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .download-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .developers-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* =========================================================
+   RESPONSIVE MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    body {
+        font-size: 15px;
+    }
+
+    nav {
+        position: relative;
+        padding: 15px 12px;
+    }
+
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    nav ul {
+        width: 100%;
+        gap: 3px;
+    }
+
+    nav ul li a {
+        padding: 7px 8px;
+        font-size: 0.75rem;
+    }
+
+    .nav-portal-btn {
+        margin-left: 0;
+    }
+
+    .custom-ad-banner {
+        padding: 18px 15px;
+    }
+
+    .custom-ad-banner h3 {
+        font-size: 1.05rem;
+    }
+
+    .custom-ad-banner p {
+        font-size: 0.85rem;
+    }
+
+    .hero {
+        min-height: 570px;
+    }
+
+    .hero-content {
+        width: 92%;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-content p {
+        font-size: 0.95rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gold-btn,
+    .white-btn {
+        width: min(280px, 90%);
+        text-align: center;
+    }
+
+    section {
+        padding: 65px 5%;
+    }
+
+    .cards,
+    .feature-grid,
+    .career-grid,
+    .developers-container {
+        grid-template-columns: 1fr;
+    }
+
+    .principal {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .principal > img {
+        height: 380px;
+    }
+
+    .student-life-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .download-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-card img {
+        height: 300px;
+    }
+
+    .info-panel {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .info-panel-icon {
+        float: none;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .small-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .portal-cta {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 55px 6%;
+    }
+
+    .portal-cta .gold-btn {
+        width: 100%;
+    }
+
+    .contact-box {
+        padding: 25px 18px;
+    }
+
+    .welcome-logo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .welcome-content h1 {
+        letter-spacing: 4px;
+    }
+
+    .welcome-subtitle {
+        letter-spacing: 2px;
+        font-size: 0.72rem;
+    }
+}
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    nav ul li a {
+        padding: 6px;
+        font-size: 0.68rem;
+    }
+
+    .hero-content h1 {
+        font-size: 1.9rem;
+    }
+
+    .section-title h2 {
+        font-size: 1.8rem;
+    }
+
+    .faculty-card img {
+        height: 250px;
+    }
+
+    .developer-img {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+/* =========================================================
+   NOVA COLLEGE FOOTER
+   ========================================================= */
+
+.footer {
+    width: 100%;
+    background: #000000;
+    color: #ffffff;
+    padding: 60px 8% 25px;
+    margin-top: 60px;
+}
+
+/* =========================================================
+   FOOTER CONTAINER
+   ========================================================= */
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.3fr;
+    gap: 50px;
+}
+
+/* =========================================================
+   FOOTER COLUMNS
+   ========================================================= */
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* =========================================================
+   COLLEGE NAME
+   ========================================================= */
+
+.footer-about h3 {
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin: 0 0 15px;
+}
+
+.footer-about p {
+    color: #bdbdbd;
+    font-size: 15px;
+    line-height: 1.8;
+    max-width: 280px;
+    margin: 0;
+}
+
+/* =========================================================
+   HEADINGS
+   ========================================================= */
+
+.footer-column h4 {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 20px;
+}
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+.footer-column a {
+    display: block;
+    color: #bdbdbd;
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 11px;
+
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.footer-column a:hover {
+    color: #00bfff;
+    transform: translateX(5px);
+}
+
+/* =========================================================
+   FOOTER BOTTOM
+   ========================================================= */
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 40px auto 0;
+    padding-top: 22px;
+
+    border-top: 1px solid #2d2d2d;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #999999;
+    font-size: 14px;
+}
+
+.footer-bottom p:first-child {
+    color: #cccccc;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .footer {
+        padding: 50px 5% 25px;
+    }
+
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .footer {
+        padding: 45px 25px 20px;
+        margin-top: 40px;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .footer-column {
+        align-items: center;
+    }
+
+    .footer-about p {
+        max-width: 320px;
+    }
+
+    .footer-column h4 {
+        margin-bottom: 15px;
+    }
+
+    .footer-column a {
+        margin-bottom: 9px;
+    }
+
+    .footer-bottom {
+        margin-top: 30px;
+        padding-top: 20px;
+
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+
+    .footer-bottom p {
+        font-size: 13px;
+    }
+
+}
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .footer {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .footer-about h3 {
+        font-size: 22px;
+    }
+
+    .footer-about p {
+        font-size: 14px;
+    }
+
+    .footer-column h4 {
+        font-size: 17px;
+    }
+
+    .footer-column a {
+        font-size: 14px;
+    }
+
+}
